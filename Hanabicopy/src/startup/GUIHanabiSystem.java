@@ -145,7 +145,7 @@ public class GUIHanabiSystem {
                         // if the current player get a replaced card
                         CoordinateSystem.logWindow.append("\n" + Action.discardaction(gameModel, response.position-1));
                         // add the target card to discard.
-                        gameModel.addToDiscardedcard(gameModel.getHands().get(gameModel.getCurrentPlayer()).get(response.position-1));
+                        gameModel.addToDiscard(gameModel.getHands().get(gameModel.getCurrentPlayer()).get(response.position-1));
                         // convert string to a card object
                         Card card = Card.stringtocard(response.card, response.position);
                         // replace this card
@@ -180,7 +180,7 @@ public class GUIHanabiSystem {
                     if (Boolean.TRUE.equals(response.replaced)) {
                         Card card = new Card(cardindex, 'q', 0);
                         Card oldcard = Card.stringtocard(response.card,0);
-                        gameModel.addToDiscardedcard(oldcard);
+                        gameModel.addToDiscard(oldcard);
                         gameModel.changeCard(card, cardindex);
                         gameModel.increaseinfotoken();
                     }
@@ -192,7 +192,7 @@ public class GUIHanabiSystem {
                 if (response.notice.equals("played")) {
                     if (!response.card.equals("none")) {
                         CoordinateSystem.logWindow.append("\n" + Action.playaction(gameModel, response.position-1));
-                        gameModel.fireworkordiscard(gameModel.getHands().get(gameModel.getCurrentPlayer()).get(response.position-1));
+                        gameModel.fireworkOrDiscard(gameModel.getHands().get(gameModel.getCurrentPlayer()).get(response.position-1));
                         Card card = Card.stringtocard(response.card, response.position);
                         gameModel.changeCard(card, (response.position));
                     }
@@ -235,7 +235,7 @@ public class GUIHanabiSystem {
                 if (response.reply.equals("burned")) {
                     if (Boolean.TRUE.equals(response.replaced)) {
                         Card card = new Card(cardindex, 'q', 0);
-                        gameModel.addToDiscardedcard(Card.stringtocard(response.card,0));
+                        gameModel.addToDiscard(Card.stringtocard(response.card,0));
                         gameModel.changeCard(card, cardindex);
                     }
                     else {
@@ -245,10 +245,10 @@ public class GUIHanabiSystem {
                                 hands.get(gameModel.getCurrentPlayer()).remove(i);
                             }
                         }
-                        gameModel.addToDiscardedcard(Card.stringtocard(response.card,0));
+                        gameModel.addToDiscard(Card.stringtocard(response.card,0));
                         gameModel.setHands(hands);
                     }
-                    gameModel.setBlackFuseCounter();
+                    gameModel.minusBlackFuseCounter();
                     gameModel.increaseCurrentPlayer();
                     CoordinateSystem.update(gameModel);
                 }
@@ -256,14 +256,14 @@ public class GUIHanabiSystem {
 
                 if (response.reply.equals("inform")) {
                     if (response.info != null && response.rank!=0  && response.player==0){
-                        gameModel.inthinttohand(response.rank,response.info);
+                        gameModel.intHintToHand(response.rank,response.info);
                         CoordinateSystem.logWindow.append("\n" + Action.youinformaction(gameModel, response.rank));
                     }
                     if (response.info != null && !response.suit.equals("")  && response.player==0 ){
-                        gameModel.colorhinttohand(response.suit.charAt(0),response.info);
+                        gameModel.colorHintToHand(response.suit.charAt(0),response.info);
                         CoordinateSystem.logWindow.append("\n" + Action.youinformaction(gameModel, response.suit));
                     }
-                    gameModel.setInforTokenCountor(gameModel.getInforTokenCountor()-1 );
+                    gameModel.setInfoTokenCounter(gameModel.getInfoToken()-1 );
                     gameModel.increaseCurrentPlayer();
                     CoordinateSystem.update(gameModel);
                 }
@@ -271,14 +271,14 @@ public class GUIHanabiSystem {
 
                 if (response.notice.equals("inform")){
                     if (response.player!=0 && response.rank !=0 && response.info == null){
-                        gameModel.inthinttoother(response.player,response.rank);
+                        gameModel.intHintToOther(response.player,response.rank);
                         CoordinateSystem.logWindow.append("\n" + Action.informaction(gameModel,response.player, response.rank));
                     }
                     if (response.player!=0 && !response.suit.equals("")   && response.info ==null){
-                        gameModel.colorhinttoother(response.player,response.suit.charAt(0));
+                        gameModel.colorHintToOther(response.player,response.suit.charAt(0));
                         CoordinateSystem.logWindow.append("\n" + Action.informaction(gameModel,response.player, response.suit));
                     }
-                    gameModel.setInforTokenCountor(gameModel.getInforTokenCountor()-1 );
+                    gameModel.setInfoTokenCounter(gameModel.getInfoToken()-1 );
                     gameModel.increaseCurrentPlayer();
                     CoordinateSystem.update(gameModel);
                 }

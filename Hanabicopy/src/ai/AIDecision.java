@@ -42,14 +42,14 @@ public class AIDecision {
          }
         //if the AI is not going to play, then give info
         //only give info if the amount of tokens is 2 or more(never take the last token)
-        if (game.getInforTokenCountor() >= 5) {
+        if (game.getInfoToken() >= 5) {
             return canAIInfo(game);
         }
 
         //if it is not giving info, choose a card to discard.
         //can't discard if if there is maximum info tokens(this should never come up because it there is tokens,
         // it will give info first)
-        if (game.getInforTokenCountor() != 8) {
+        if (game.getInfoToken() != 8) {
             return canAIDiscard(game);
         }
 

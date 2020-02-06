@@ -117,7 +117,7 @@ public class CoordinateSystem {
         Hanabiclient.panel.add(CurrentPlayer,JLayeredPane.MODAL_LAYER);
 
 
-        int v =game.getInforTokenCountor();
+        int v =game.getInfoToken();
         info = new JLabel(String.valueOf(v));
         info.setFont((new Font("Time",Font.BOLD,25)));
         info.setForeground(Color.white);
@@ -139,7 +139,7 @@ public class CoordinateSystem {
         Hanabiclient.panel.add(points,JLayeredPane.MODAL_LAYER);
 
 
-        LinkedList<LinkedList<Card>> discard = game.getDiscardedcard();
+        LinkedList<LinkedList<Card>> discard = game.getDiscardedCard();
         discardaddtopanel(lbldiscard,discard);
 
         LinkedList<LinkedList<Card>> firework = game.getFirework();

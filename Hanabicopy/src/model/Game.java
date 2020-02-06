@@ -13,49 +13,28 @@ import java.util.stream.Collectors;
 public class Game {
     //File
     private File file = new File("/output.csv");
-
     //Token
     private int inforTokenCountor;
     private int blackFuseCounter;
-
     //rainbow
     private boolean rainbow;
-    private boolean wild;
-
-    // Card count
-    private int deckCount;
-
-
     // linkedlist
     private LinkedList <LinkedList<Card>> discardedcard;
-    private LinkedList<Action> history;
-
-    // point
-    private int points;
-
     // timer
     private int timer;
-
     // Current
     private int currentPlayer;
-
     //hand
     private LinkedList<LinkedList<Card>> hands;
-
     // firework
     private LinkedList<LinkedList<Card>> firework;
-
-    // ????
+    // if this is last turn
     private boolean lastTurn;
-
-
-    // number of player
-    private int playernumber;
-
-    private boolean youTurn;
-
+    // your seat number
     private int you;
-
+    // your turn?
+    private  boolean youTurn;
+    // listeners
     private ArrayList<Subscriber> point_listener;
     private ArrayList<Subscriber> card_change_listener;
     private ArrayList<Subscriber> fuse_token_listener;
@@ -63,62 +42,44 @@ public class Game {
 
 
     // init
-    public Game(LinkedList<LinkedList<String>> hand,int timer, boolean rainbow, boolean wild) {
+    public Game(LinkedList<LinkedList<String>> hand,int timer, boolean rainbow) {
+        // info token, fuse token
         this.inforTokenCountor = 8;
         this.blackFuseCounter= 3;
-        this.playernumber=hand.size();
+        // hands init
         this.hands=Card.stringtohand(hand);
-        this.points=0;
+        // if rainbow cards
         this.rainbow = rainbow;
-        this.wild = wild;
-
-        int handcount = hands.size() * hands.get(0).size();
-
-        if(rainbow)
-        {
-            this.deckCount = 60 - handcount;
-        }else {
-            this.deckCount = 50 - handcount;
-        }
-
-
+        // init linked list of discard and history
         this.discardedcard=new LinkedList<>();
-        this.history=new LinkedList<>();
-
+        this.firework = new LinkedList<>();
         this.timer = timer;
-
+        // start from player 0
         this.currentPlayer=0;
         this.lastTurn=false;
 
-        firework = new LinkedList<>();
 
-        if(rainbow && !wild)
+        if(rainbow)
         {
             for(int i = 0; i < 6; i++)
             {
-                firework.add(new LinkedList<Card>());
-                discardedcard.add(new LinkedList<>());
-            }
-        }else
-        {
-            for(int i = 0; i < 5; i++)
-            {
-                firework.add(new LinkedList<Card>());
+                firework.add(new LinkedList<>());
                 discardedcard.add(new LinkedList<>());
             }
         }
-
+        else {
+            for(int i = 0; i < 5; i++)
+            {
+                firework.add(new LinkedList<>());
+                discardedcard.add(new LinkedList<>());
+            }
+        }
         for (int i =0 ; i<hands.size();i++){
             if (hands.get(i).get(0).getCardColor() == 'q')
             {
                 you = i;
             }
         }
-
-    }
-
-    public void addHistory(Action action) {
-        this.history.add(action);
     }
 
 
@@ -126,19 +87,12 @@ public class Game {
         return blackFuseCounter;
     }
 
-    public int getDeckCount() {
-        return deckCount;
-    }
 
-    public LinkedList<LinkedList<Card>> getDiscardedcard() {
+    public LinkedList<LinkedList<Card>> getDiscardedCard() {
         return discardedcard;
     }
 
-    public LinkedList<Action> getHistory()
-    {
-        return history;
-    }
-
+    // add listener ----------------------------------
     public int getPoints()
     {
         int points = 0;
@@ -151,34 +105,29 @@ public class Game {
         return points;
     }
 
-    public void setInforTokenCountor(int inforTokenCountor)
-    {
-        this.inforTokenCountor = inforTokenCountor;
-    }
 
-    public void setBlackFuseCounter()
+    public void minusBlackFuseCounter()
     {
         this.blackFuseCounter--;
     }
 
-    public void setDeckCount()
-    {
-        this.deckCount--;
-    }
 
-    public void addToDiscardedcard(Card card) {
-        char colour = card.cardColor;
+    // add the parameter to discard;
+    // add listener ----------------------------------
+    public void addToDiscard(Card card) {
+        char colour = card.getCardColor();
         boolean found = false;
 
         //find the firework with the same colour
         for(int i = 0; i < this.discardedcard.size(); i++)
         {
-            if((discardedcard.get(i).size() != 0) && discardedcard.get(i).get(0).cardColor == colour)
+            if((discardedcard.get(i).size() != 0) && discardedcard.get(i).get(0).getCardColor() == colour)
             {
                 discardedcard.get(i).add(card);
                 found = true;
             }
         }
+
 
         //if the firework of that colour doesnt exist yet
         if(found == false)
@@ -194,6 +143,36 @@ public class Game {
         }
     }
 
+
+    // add listener ----------------------------------
+    // add card to firework
+    public void addToFirework(Card card)
+    {
+        char colour = card.getCardColor();
+        boolean found = false;
+
+        //find the firework with the same colour
+        for(int i = 0; i < this.firework.size(); i++) {
+            if((firework.get(i).size() != 0) && firework.get(i).get(0).getCardColor() == colour) {
+                firework.get(i).add(card);
+                found = true;
+            }
+        }
+
+        //if the firework of that colour doesnt exist yet
+        if(!found) {
+            for (LinkedList<Card> cards : this.firework) {
+                if (cards.size() == 0) {
+                    cards.add(card);
+                    return;
+                }
+            }
+        }
+    }
+
+
+    // add one info token
+    // add listener ----------------------------------
     public void increaseinfotoken(){
         if (inforTokenCountor == 8){
             inforTokenCountor = 8;
@@ -204,6 +183,7 @@ public class Game {
     }
 
 
+    // add listener ----------------------------------
     public void increaseCurrentPlayer() {
         if (this.currentPlayer ==( hands.size() -1)){
             currentPlayer = 0;
@@ -213,11 +193,13 @@ public class Game {
         }
     }
 
-
+    // add listener ----------------------------------
+    // probably not set, but remove some card from hands
     public void setHands(LinkedList<LinkedList<Card>> hands) {
         this.hands = hands;
     }
 
+    // add listener ----------------------------------
     public void changeCard(Card card, int pos)
     {
         for (int i = 0; i < hands.get(currentPlayer).size(); i++) {
@@ -227,67 +209,51 @@ public class Game {
         }
     }
 
-    public void addToFirework(Card card)
-    {
-        char colour = card.cardColor;
-        boolean found = false;
-
-        //find the firework with the same colour
-        for(int i = 0; i < this.firework.size(); i++) {
-            if((firework.get(i).size() != 0) && firework.get(i).get(0).cardColor == colour) {
-                firework.get(i).add(card);
-                found = true;
-            }
-        }
-
-        //if the firework of that colour doesnt exist yet
-        if(found == false) {
-            for(int i = 0; i < this.firework.size(); i++) {
-                if(firework.get(i).size() == 0) {
-                    firework.get(i).add(card);
-                    return;
-                }
-            }
-        }
-    }
-
+    // add listener ----------------------------------
     public void setYouTurn(boolean youTurn) {
         this.youTurn = youTurn;
     }
 
+
     public int getCurrentPlayer() {
         return currentPlayer;
     }
+
 
     public LinkedList<LinkedList<Card>> getFirework() {
         return firework;
     }
 
 
-    public int getInforTokenCountor() {
+    public int getInfoToken() {
         return inforTokenCountor;
     }
+
 
     public LinkedList<LinkedList<Card>> getHands() {
         return hands;
     }
 
+
     public int getTimer() {
         return timer;
     }
 
+
     public int getYou() {
         return you;
     }
+
 
     public boolean getLastTurn()
     {
         return lastTurn;
     }
 
-    public void inthinttohand(int hint,LinkedList<Boolean> listhint){
+
+    public void intHintToHand(int hint, LinkedList<Boolean> listhint){
         for (int i =0; i<listhint.size();i++){
-            if (listhint.get(i) == true)
+            if (listhint.get(i))
             {
                 hands.get(getYou()).get(i).setCardRank(hint);
                 hands.get(getYou()).get(i).setRankKnown();
@@ -295,16 +261,18 @@ public class Game {
         }
     }
 
-    public void colorhinttohand(char color,LinkedList<Boolean> listhint){
+
+    public void colorHintToHand(char color, LinkedList<Boolean> listhint){
         for (int i =0; i<listhint.size();i++){
-            if (listhint.get(i) == true) {
+            if (listhint.get(i)) {
                 hands.get(getYou()).get(i).setCardColor(color);
                 hands.get(getYou()).get(i).setRankKnown();
             }
         }
     }
 
-    public void inthinttoother(int playerposition, int hint){
+
+    public void intHintToOther(int playerposition, int hint){
         for (int i =0 ; i<hands.get(playerposition -1).size();i++){
             if (hands.get(playerposition -1).get(i).getCardRank() == hint){
                 hands.get(playerposition -1).get(i).setRankKnown();
@@ -313,15 +281,17 @@ public class Game {
     }
 
 
-    public void colorhinttoother(int playernumber,char suit){
-        for (int i =0 ; i<hands.get(playernumber -1).size();i++){
-            if (hands.get(playernumber -1).get(i).getCardColor() == suit){
-                hands.get(playernumber -1).get(i).setColorKnown();
+    public void colorHintToOther(int player_number, char suit){
+        for (int i =0 ; i<hands.get(player_number -1).size();i++){
+            if (hands.get(player_number -1).get(i).getCardColor() == suit){
+                hands.get(player_number -1).get(i).setColorKnown();
             }
         }
     }
 
-    public void fireworkordiscard(Card card){
+
+    // judge if the current card go to firework or discard;
+    public void fireworkOrDiscard(Card card){
         for (int i = 0; i < firework.size();i++){
             if (firework.get(i).size() == 0){
                 if (card.getCardRank() == 1){
@@ -329,7 +299,7 @@ public class Game {
                     break;
                 }
                 else {
-                    addToDiscardedcard(card);
+                    addToDiscard(card);
                     blackFuseCounter--;
                     break;
                 }
@@ -340,7 +310,7 @@ public class Game {
                     break;
                 }
                 else {
-                    addToDiscardedcard(card);
+                    addToDiscard(card);
                     blackFuseCounter--;
                     break;
                 }
@@ -348,14 +318,17 @@ public class Game {
         }
     }
 
+    // for data collecting
     public void writetocsv(String action,int position, String suit, int rank){
         try {
             FileWriter output = new FileWriter(file,true);
             ArrayList<String> result = new ArrayList<>();
 
+
             for (Card i: hands.get(currentPlayer)){
                 result.add(i.toString());
             }
+
 
             for (int i=0;i< hands.size();i++){
                 if (i != currentPlayer){
@@ -364,6 +337,7 @@ public class Game {
                     }
                 }
             }
+
 
             for (int i=0;i< hands.size();i++){
                 if (i != currentPlayer){
@@ -375,39 +349,74 @@ public class Game {
             }
 
 
-
             int startpoint = 0;
             for (LinkedList<Card> i : firework){
                 if (i.size() != 0){
                     result.add(i.getLast().toString());
                 }
             }
-
             for (int i =0 ; i<firework.size();i++){
                 if (firework.get(i).size() != 0){
                     startpoint = i;
                 }
             }
-
             for (int i = startpoint; i< firework.size();i++){
                 result.add("nocard");
             }
             result.add(String.valueOf(inforTokenCountor));
-
             result.add(action);
             result.add(String.valueOf(position));
             result.add(suit);
             result.add(String.valueOf(rank));
-
             String collect = result.stream().collect(Collectors.joining(",")) + "\n";
             output.write(collect);
             output.close();
-
         }
         catch (IOException e){
-
+            System.out.println("data collecting error");
         }
-
-
     }
+
+    public void notifyPoint_listener() {
+        for (Subscriber i: point_listener){
+            i.notifythis();
+        }
+    }
+
+    public void addPoint_listener(Subscriber subscriber) {
+        this.point_listener.add(subscriber);
+    }
+
+    public void notifyCard_change_listener() {
+        for (Subscriber i: card_change_listener){
+            i.notifythis();
+        }
+    }
+
+    public void addCard_change_listener(Subscriber subscriber) {
+        this.card_change_listener.add(subscriber);
+    }
+
+
+    public void notifyFuse_token_listener() {
+        for (Subscriber i: fuse_token_listener){
+            i.notifythis();
+        }
+    }
+
+    public void addFuse_token_listener(Subscriber subscriber) {
+        this.fuse_token_listener.add(subscriber);
+    }
+
+    public void notifyInfo_token_listener() {
+        for (Subscriber i: info_token_listener){
+            i.notifythis();
+        }
+    }
+
+    public void addInfo_token_listener(Subscriber subscriber) {
+        this.info_token_listener.add(subscriber);
+    }
+
+
 }
