@@ -106,6 +106,7 @@ public class Game {
     }
 
 
+    // add listener ------------------------------------
     public void minusBlackFuseCounter()
     {
         this.blackFuseCounter--;
@@ -132,7 +133,6 @@ public class Game {
                 found = true;
             }
         }
-
 
         //if the firework of that colour doesnt exist yet
         if(found == false)

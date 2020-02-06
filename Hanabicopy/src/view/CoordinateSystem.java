@@ -3,7 +3,6 @@ package view;
 import model.Card;
 import model.Game;
 import view.listeners.MainListener;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
@@ -22,7 +21,13 @@ public class CoordinateSystem {
     public static JLabel pdcard;
     public static JTextArea logWindow;
 
-    public static void initboard(){
+
+    public static void initboard()
+    {
+        /*
+          the things not needed to change when model change, icon and backgrounds;
+         */
+        // played cards, add background
         boardPlayedCard = new JLabel();
         ImageIcon img = new javax.swing.ImageIcon(CoordinateSystem.class.getResource("/FireworkBack.png"));
         Image image = img.getImage();
@@ -31,6 +36,8 @@ public class CoordinateSystem {
         boardPlayedCard.setBounds(90,60,420,120);
         Hanabiclient.panel.add(boardPlayedCard,JLayeredPane.PALETTE_LAYER);
 
+
+        // discard card; add background
         boardDiscards = new JLabel();
         ImageIcon img1 = new ImageIcon(CoordinateSystem.class.getResource("/DiscardBack.png"));
         Image image1 = img1.getImage();
@@ -39,6 +46,8 @@ public class CoordinateSystem {
         boardDiscards.setBounds(90,200,420,500);
         Hanabiclient.panel.add(boardDiscards,JLayeredPane.PALETTE_LAYER);
 
+
+        // info counter, add a icon
         infoCounter=new JLabel();
         ImageIcon img2 = new ImageIcon(CoordinateSystem.class.getResource("/time.png" ));
         Image image2 = img2.getImage();
@@ -47,6 +56,8 @@ public class CoordinateSystem {
         infoCounter.setBounds(550,170,50,50);
         Hanabiclient.panel.add(infoCounter,JLayeredPane.MODAL_LAYER);
 
+
+        // fuse counter icon
         fuseCounter=new JLabel();
         ImageIcon imgfuse = new ImageIcon(CoordinateSystem.class.getResource("/boom.png") );
         Image imgefuse = imgfuse.getImage();
@@ -55,6 +66,8 @@ public class CoordinateSystem {
         fuseCounter.setBounds(550,220,50,50);
         Hanabiclient.panel.add(fuseCounter,JLayeredPane.MODAL_LAYER);
 
+
+        // current player text:
         currentPlayerB=new JLabel("Current Player");
         currentPlayerB.setFont((new Font("Time",Font.BOLD,18)));
         currentPlayerB.setForeground(Color.white);
@@ -62,6 +75,7 @@ public class CoordinateSystem {
         Hanabiclient.panel.add(currentPlayerB,JLayeredPane.MODAL_LAYER);
 
 
+        // total point text
         totalpoint=new JLabel("Total points:");
         totalpoint.setFont((new Font("Time",Font.BOLD,18)));
         totalpoint.setForeground(Color.white);
@@ -69,6 +83,7 @@ public class CoordinateSystem {
         Hanabiclient.panel.add(totalpoint,JLayeredPane.MODAL_LAYER);
 
 
+        // log window init
         logWindow = new JTextArea("Welcome Hanabi!");
         logWindow.setFont((new Font("Time", Font.BOLD, 14)));
         logWindow.setForeground(Color.black);
@@ -79,23 +94,14 @@ public class CoordinateSystem {
         Hanabiclient.panel.add(jScrollPane,JLayeredPane.MODAL_LAYER);
     }
 
+
+    // using game model to initialize
     public static void init(Game game){
-        LinkedList<LinkedList<Card>> hand = game.getHands();
+        // init hands of players
+        inithands(game);
 
-        for (int i =0; i< hand.size(); i++){
-            for (int j= 0 ; j < hand.get(i).size();j++){
-                lblCard[i][j] = new JLabel();
-                ImageIcon img = new ImageIcon(CoordinateSystem.class.getResource ( "/"+hand.get(i).get(j).getCardColor() + hand.get(i).get(j).getCardRank() +".jpg" ));
-                Image image = img.getImage();
-                Image newing = image.getScaledInstance(60,97, Image.SCALE_SMOOTH);
-                lblCard[i][j] = new JLabel( new ImageIcon (newing));
-                lblCard[i][j].setBounds(900+j*70,50+i*120,60,97);
-                Hanabiclient.panel.add(lblCard[i][j],JLayeredPane.MODAL_LAYER);
-            }
-        }
-
-
-        for (int i =0; i< hand.size();i++){
+        // player label for selection. only need to do once.
+        for (int i =0; i< game.getHands().size();i++){
             lblPlayer[i] = new JLabel();
             ImageIcon img = new ImageIcon(CoordinateSystem.class.getResource("/player"+String.valueOf(i+1)+".png" ));
             Image image = img.getImage();
@@ -106,8 +112,7 @@ public class CoordinateSystem {
         }
 
 
-
-
+        //current player.
         int i = game.getCurrentPlayer();
         ImageIcon img = new ImageIcon(CoordinateSystem.class.getResource("/player"+String.valueOf(i+1)+".png" ));
         Image image = img.getImage();
@@ -117,6 +122,7 @@ public class CoordinateSystem {
         Hanabiclient.panel.add(CurrentPlayer,JLayeredPane.MODAL_LAYER);
 
 
+        //game info counter.
         int v =game.getInfoToken();
         info = new JLabel(String.valueOf(v));
         info.setFont((new Font("Time",Font.BOLD,25)));
@@ -124,6 +130,8 @@ public class CoordinateSystem {
         info.setBounds(650,160,70,70);
         Hanabiclient.panel.add(info,JLayeredPane.MODAL_LAYER);
 
+
+        // game fuse counter.
         int m=game.getBlackFuseCounter();
         fuse=new JLabel(String.valueOf(m));
         fuse.setFont((new Font("Time",Font.BOLD,25)));
@@ -131,6 +139,8 @@ public class CoordinateSystem {
         fuse.setBounds(650,210,70,70);
         Hanabiclient.panel.add(fuse,JLayeredPane.MODAL_LAYER);
 
+
+        // game points.
         int t = game.getPoints();
         points=new JLabel(String.valueOf(t));
         points.setFont((new Font("Time",Font.BOLD,26)));
@@ -147,6 +157,22 @@ public class CoordinateSystem {
     }
 
 
+    private static void inithands(Game game){
+        LinkedList<LinkedList<Card>> hand = game.getHands();
+        for (int i =0; i< hand.size(); i++){
+            for (int j= 0 ; j < hand.get(i).size();j++){
+                lblCard[i][j] = new JLabel();
+                ImageIcon img = new ImageIcon(CoordinateSystem.class.getResource ( "/"+hand.get(i).get(j).getCardColor() + hand.get(i).get(j).getCardRank() +".jpg" ));
+                Image image = img.getImage();
+                Image newing = image.getScaledInstance(60,97, Image.SCALE_SMOOTH);
+                lblCard[i][j] = new JLabel( new ImageIcon (newing));
+                lblCard[i][j].setBounds(900+j*70,50+i*120,60,97);
+                Hanabiclient.panel.add(lblCard[i][j],JLayeredPane.MODAL_LAYER);
+            }
+        }
+    }
+
+
     private static void discardaddtopanel(JLabel[][] tobeadd, LinkedList<LinkedList<Card>> hand){
         for (int i =0; i< hand.size(); i++){
             for (int j= 0 ; j < hand.get(i).size();j++){
@@ -158,8 +184,8 @@ public class CoordinateSystem {
                 Hanabiclient.panel.add(tobeadd[i][j],JLayeredPane.MODAL_LAYER);
             }
         }
-
     }
+
 
     private static void fireworkaddtopanel(JLabel[] tobeadd, LinkedList<LinkedList<Card>> hand){
         for (int i =0; i< hand.size(); i++){
@@ -177,9 +203,6 @@ public class CoordinateSystem {
 
 
     public static void clearpanel(int x,int y,int z){
-        // x is # of player;
-        // y is # of card for player
-        // z is # of card in firework
         for (int i =0 ; i< x ;i++){
             for (int j =0; j<y;j++){
                 Hanabiclient.panel.remove(lblCard[i][j]);
@@ -196,7 +219,6 @@ public class CoordinateSystem {
             }
             Hanabiclient.panel.remove(lblfirework[i]);
         }
-
         for (int i =0;i<6;i++){
             if (lbldiscard[i]==null){
                 break;
@@ -219,13 +241,15 @@ public class CoordinateSystem {
         pdcard = new JLabel("");
     }
 
+
     public static void update(Game game){
-        int x= game.getHands().size();
+        int x=game.getHands().size();
         int y = game.getHands().get(0).size();
         int z = game.getFirework().size();
         clearpanel(x,y,6);
         init(game);
     }
+
 
     public static void addActionListners(Game game) {
         for (int i = 0; i < game.getHands().get(0).size(); i++) {

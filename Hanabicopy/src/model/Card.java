@@ -76,7 +76,6 @@ public class Card{
     }
 
 
-
     public void setColorKnown() {
         this.colorKnown = true;
     }
@@ -84,7 +83,6 @@ public class Card{
     public void setRankKnown() {
         this.rankKnown = true;
     }
-
 
     public boolean getColorKnown() {
         return colorKnown;

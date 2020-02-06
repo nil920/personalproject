@@ -30,10 +30,6 @@ public class Waitingroom{
         this.gameid = gameid;
     }
 
-    public void setSecretToken(String secretToken) {
-        this.secretToken = secretToken;
-    }
-
     public void setTimer(int timer) {
         this.timer = timer;
     }
