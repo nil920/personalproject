@@ -14,7 +14,7 @@ public class Game {
     //File
     private File file = new File("/output.csv");
     //Token
-    private int inforTokenCountor;
+    private int inforTokenCounter;
     private int blackFuseCounter;
     //rainbow
     private boolean rainbow;
@@ -44,7 +44,7 @@ public class Game {
     // init
     public Game(LinkedList<LinkedList<String>> hand,int timer, boolean rainbow) {
         // info token, fuse token
-        this.inforTokenCountor = 8;
+        this.inforTokenCounter = 8;
         this.blackFuseCounter= 3;
         // hands init
         this.hands=Card.stringtohand(hand);
@@ -111,6 +111,11 @@ public class Game {
         this.blackFuseCounter--;
     }
 
+    public void minusInfoCounter()
+    {
+        this.inforTokenCounter--;
+    }
+
 
     // add the parameter to discard;
     // add listener ----------------------------------
@@ -174,11 +179,11 @@ public class Game {
     // add one info token
     // add listener ----------------------------------
     public void increaseinfotoken(){
-        if (inforTokenCountor == 8){
-            inforTokenCountor = 8;
+        if (inforTokenCounter == 8){
+            inforTokenCounter = 8;
         }
         else {
-            inforTokenCountor++;
+            inforTokenCounter++;
         }
     }
 
@@ -226,7 +231,7 @@ public class Game {
 
 
     public int getInfoToken() {
-        return inforTokenCountor;
+        return inforTokenCounter;
     }
 
 
@@ -363,7 +368,7 @@ public class Game {
             for (int i = startpoint; i< firework.size();i++){
                 result.add("nocard");
             }
-            result.add(String.valueOf(inforTokenCountor));
+            result.add(String.valueOf(inforTokenCounter));
             result.add(action);
             result.add(String.valueOf(position));
             result.add(suit);

@@ -145,7 +145,7 @@ public class AIDecision {
                 int rank = game.getHands().get(game.getCurrentPlayer()).get(j).getCardRank() ;
 
                 //if the firework colour is a wildcard, and wildcards are on, do not check colour
-                if (game.getFirework().get(i).size() != 0 && 'w' == game.getFirework().get(i).get(0).getCardColor() && game.wild) {
+                if (game.getFirework().get(i).size() != 0 && 'w' == game.getFirework().get(i).get(0).getCardColor() ) {
                     if ((colourKnown || rankKnown) &&     //is the colour and rank known?
                             (game.getFirework().get(i).get(0) != null) && // is the firework not null?
                             ((game.getFirework().get(i).size() + 1) == rank)) { //is the card rank the next one?
@@ -220,7 +220,7 @@ public class AIDecision {
                 yellow = true;
             }
 
-            if ((game.getFirework().get(i).size()!=0 &&game.getFirework().get(i).getFirst().getCardColor() == 'm') && !game.wild) {
+            if ((game.getFirework().get(i).size()!=0 &&game.getFirework().get(i).getFirst().getCardColor() == 'm')) {
                 wildCard = true;
             }
         }
@@ -483,7 +483,7 @@ public class AIDecision {
             }
 
             //if the card colour is not useful
-            if (game.getHands().get(game.getCurrentPlayer()).get(j).getCardColor() == 'm' && wild == true && !game.wild) {
+            if (game.getHands().get(game.getCurrentPlayer()).get(j).getCardColor() == 'm' && wild == true ) {
                 return new AIPlay("discard", j);
             }
         }

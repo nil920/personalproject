@@ -101,11 +101,10 @@ public class GUIHanabiSystem {
                     Hanabiclient.init();
                     Hanabiclient.display();
                     if (rainbow.equals("none")) {
-                        gameModel = new Game(response.hands, timer, false, false);
-                    } else if (rainbow.equals("wild")) {
-                        gameModel = new Game(response.hands, timer, false, true);
-                    } else {
-                        gameModel = new Game(response.hands, timer, true, true);
+                        gameModel = new Game(response.hands, timer, false);
+                    }
+                    else {
+                        gameModel = new Game(response.hands, timer, true);
                     }
                     // game view initilize
                     CoordinateSystem.initboard();
@@ -165,6 +164,7 @@ public class GUIHanabiSystem {
                     gameModel.increaseinfotoken();
                     CoordinateSystem.update(gameModel);
                 }
+
 
                 if (response.reply.equals("accepted")) {
                     if (Boolean.FALSE.equals(response.replaced)){
@@ -263,7 +263,7 @@ public class GUIHanabiSystem {
                         gameModel.colorHintToHand(response.suit.charAt(0),response.info);
                         CoordinateSystem.logWindow.append("\n" + Action.youinformaction(gameModel, response.suit));
                     }
-                    gameModel.setInfoTokenCounter(gameModel.getInfoToken()-1 );
+                    gameModel.minusInfoCounter();
                     gameModel.increaseCurrentPlayer();
                     CoordinateSystem.update(gameModel);
                 }
@@ -278,7 +278,7 @@ public class GUIHanabiSystem {
                         gameModel.colorHintToOther(response.player,response.suit.charAt(0));
                         CoordinateSystem.logWindow.append("\n" + Action.informaction(gameModel,response.player, response.suit));
                     }
-                    gameModel.setInfoTokenCounter(gameModel.getInfoToken()-1 );
+                    gameModel.minusInfoCounter();
                     gameModel.increaseCurrentPlayer();
                     CoordinateSystem.update(gameModel);
                 }

@@ -10,51 +10,51 @@ public class Action{
      */
     public static String playaction(Game game,int Position) {
         String colorName;
-        if(game.hands.get(game.currentPlayer).get(Position).cardColor =='r')
+        if(game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='r')
         {
             colorName = "red";
-        }else if(game.hands.get(game.currentPlayer).get(Position).cardColor =='b')
+        }else if(game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='b')
         {
             colorName = "blue";
-        }else if (game.hands.get(game.currentPlayer).get(Position).cardColor =='y')
+        }else if (game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='y')
         {
             colorName = "yellow";
-        }else if (game.hands.get(game.currentPlayer).get(Position).cardColor =='w')
+        }else if (game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='w')
         {
             colorName = "white";
-        }else if (game.hands.get(game.currentPlayer).get(Position).cardColor =='g')
+        }else if (game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='g')
         {
             colorName = "green";
         }else
         {
             colorName = "wild";
         }
-        Info = "The player " + (game.getCurrentPlayer() + 1) + " play the " + colorName + " " +game.hands.get(game.currentPlayer).get(Position).cardRank ;
+        Info = "The player " + (game.getCurrentPlayer() + 1) + " play the " + colorName + " " +game.getHands().get(game.getCurrentPlayer()).get(Position).getCardRank() ;
         return Info;
     }
     public static String discardaction(Game game,int Position)
     {
         String colorName;
-        if(game.hands.get(game.currentPlayer).get(Position).cardColor =='r')
+        if(game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='r')
         {
             colorName = "red";
-        }else if(game.hands.get(game.currentPlayer).get(Position).cardColor =='b')
+        }else if(game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='b')
         {
             colorName = "blue";
-        }else if (game.hands.get(game.currentPlayer).get(Position).cardColor =='y')
+        }else if (game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='y')
         {
             colorName = "yellow";
-        }else if (game.hands.get(game.currentPlayer).get(Position).cardColor =='w')
+        }else if (game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='w')
         {
             colorName = "white";
-        }else if (game.hands.get(game.currentPlayer).get(Position).cardColor =='g')
+        }else if (game.getHands().get(game.getCurrentPlayer()).get(Position).getCardColor() =='g')
         {
             colorName = "green";
         }else
         {
             colorName = "wild";
         }
-        Info= "The player " + (game.getCurrentPlayer() +1) + " discard the " + colorName + " " + game.hands.get(game.currentPlayer).get(Position).cardRank;
+        Info= "The player " + (game.getCurrentPlayer() +1) + " discard the " + colorName + " " + game.getHands().get(game.getCurrentPlayer()).get(Position).getCardRank();
         return Info;
     }
 
@@ -64,26 +64,26 @@ public class Action{
         return Info;
     }
 
-    public static String youinformaction(Game game, String cardColor)
+    public static String youinformaction(Game game, String CardColor)
     {
         String colorName;
-        if(cardColor.equals("r"))
+        if(CardColor.equals("r"))
         {
             colorName = "red";
-        }else if(cardColor.equals("b"))
+        }else if(CardColor.equals("b"))
         {
             colorName = "blue";
-        }else if (cardColor.equals("y"))
+        }else if (CardColor.equals("y"))
         {
             colorName = "yellow";
-        }else if (cardColor.equals("w"))
+        }else if (CardColor.equals("w"))
         {
             colorName = "white";
         }else
         {
             colorName = "green";
         }
-        Info= "The player " + (game.currentPlayer + 1) + " gave Information about Color " + colorName +" to you";
+        Info= "The player " + (game.getCurrentPlayer() + 1) + " gave Information about Color " + colorName +" to you";
         return Info;
     }
 
@@ -94,26 +94,26 @@ public class Action{
         return Info;
     }
 
-    public static String informaction(Game game,int playerRecieve, String cardColor)
+    public static String informaction(Game game,int playerRecieve, String CardColor)
     {
         String colorName;
-        if(cardColor.equals("r"))
+        if(CardColor.equals("r"))
         {
             colorName = "red";
-        }else if(cardColor.equals("b"))
+        }else if(CardColor.equals("b"))
         {
             colorName = "blue";
-        }else if (cardColor.equals("y"))
+        }else if (CardColor.equals("y"))
         {
             colorName = "yellow";
-        }else if (cardColor.equals("w"))
+        }else if (CardColor.equals("w"))
         {
             colorName = "white";
         }else
         {
             colorName = "green";
         }
-        Info= "The player " + (game.currentPlayer + 1) + " gave Information about Color " + colorName +" to player " +playerRecieve;
+        Info= "The player " + (game.getCurrentPlayer() + 1) + " gave Information about Color " + colorName +" to player " +playerRecieve;
         return Info;
     }
 }
