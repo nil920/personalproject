@@ -10,4 +10,5 @@ public interface Subscriber {
     public void notifyDiscardChange();
     public void addActionListener();
     public void disableActionListner();
+    public void notifyHint();
 }

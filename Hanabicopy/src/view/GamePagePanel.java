@@ -1,7 +1,11 @@
 package view;
 
+import model.Game;
+import view.listeners.MainListener;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class GamePagePanel {
 
@@ -15,8 +19,10 @@ public class GamePagePanel {
     private JLabel lblBoard;
     private Counter counter;
     public JComboBox colors,ranks;
+    private Game game;
 
-    public void init(){
+
+    public GamePagePanel(){
         lblBoard  = new JLabel(background);
         lblBoard.setBounds(0,20,1366,768);
 
@@ -114,5 +120,19 @@ public class GamePagePanel {
         give.setVisible(false);
         colors.setVisible(false);
         ranks.setVisible(false);
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public void aiButtonAddListener(){
+        AIA.addActionListener(MainListener.createAIAlistener(game));
+    }
+
+    public void aiButtonRemoveListener(){
+        for (ActionListener i :AIA.getActionListeners()){
+            AIA.removeActionListener(i);
+        }
     }
 }

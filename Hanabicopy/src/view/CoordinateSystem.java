@@ -177,6 +177,7 @@ public class CoordinateSystem implements Subscriber{
     }
 
 
+
     private void discardAddToPanel(JLabel[][] tobeadd){
         for (int i =0; i< hand.size(); i++){
             for (int j= 0 ; j < hand.get(i).size();j++){
@@ -283,6 +284,20 @@ public class CoordinateSystem implements Subscriber{
         }
     }
 
+    public void hintChangeIcon(){
+        int you = game.getYou();
+        int counter = 0;
+        for (Card i : game.getHands().get(you)){
+            ImageIcon img = new ImageIcon(CoordinateSystem.class.getResource ( "/"+i.getCardColor() +i.getCardRank() +".jpg" ));
+            Image image = img.getImage();
+            Image newing = image.getScaledInstance(60,97, Image.SCALE_SMOOTH);
+            lblCard[you][counter].setIcon(new ImageIcon(newing));
+            counter++;
+        }
+    }
+
+
+
     @Override
     public void notifyPointChange() {
         points.setText(String.valueOf(game.getPoints()));
@@ -330,6 +345,11 @@ public class CoordinateSystem implements Subscriber{
     @Override
     public void disableActionListner() {
         disableActionListener();
+    }
+
+    @Override
+    public void notifyHint() {
+
     }
 
 

@@ -233,7 +233,12 @@ public class Game {
     // add listener ----------------------------------
     public void setYouTurn(boolean youTurn) {
         this.youTurn = youTurn;
-        notifyYou_Turn();
+        if (youTurn){
+            notifyYou_Turn();
+        }
+        if (!youTurn){
+            disableActionListener();
+        }
     }
 
 
@@ -281,7 +286,7 @@ public class Game {
                 hands.get(you).get(i).setRankKnown();
             }
         }
-        notifyHand_change();
+        notyfiHint();
     }
 
 
@@ -292,7 +297,7 @@ public class Game {
                 hands.get(you).get(i).setColorKnown();
             }
         }
-        notifyHand_change();
+        notyfiHint();
     }
 
 
@@ -324,7 +329,7 @@ public class Game {
                 }
                 else {
                     addToDiscard(card);
-                    blackFuseCounter--;
+                    minusBlackFuseCounter();
                     break;
                 }
             }
@@ -335,7 +340,7 @@ public class Game {
                 }
                 else {
                     addToDiscard(card);
-                    blackFuseCounter--;
+                    minusBlackFuseCounter();
                     break;
                 }
             }
@@ -411,13 +416,6 @@ public class Game {
         this.subscribers.add(subscriber);
     }
 
-    private void notifyCard_change_listener() {
-        for (Subscriber i: subscribers){
-            i.notifyHandChange();
-        }
-    }
-
-
     private void notifyFuse_token_listener() {
         for (Subscriber i: subscribers){
             i.notifyFuseTokenChange();
@@ -457,6 +455,19 @@ public class Game {
     private void notifyYou_Turn(){
         for (Subscriber i: subscribers){
             i.addActionListener();
+        }
+    }
+
+    private void disableActionListener(){
+        for (Subscriber i:subscribers){
+            i.disableActionListner();
+        }
+    }
+
+
+    private void notyfiHint(){
+        for (Subscriber i:subscribers){
+            i.notifyHint();
         }
     }
 

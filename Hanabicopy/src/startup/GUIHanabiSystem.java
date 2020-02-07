@@ -27,7 +27,7 @@ public class GUIHanabiSystem {
     private static WaitingRoom waitingroomView;
     public static int cardindex;
     public static boolean canceltimer;
-    public static GamePagePanel Hanabi_client = new GamePagePanel();
+    public static GamePagePanel Hanabi_client;
     public static boolean AI = false;
 
     private static CoordinateSystem coordinateSystem;
@@ -100,7 +100,7 @@ public class GUIHanabiSystem {
                 //game start
                 if (response.notice.equals("game starts")) {
                     waitingroomView.dispose();
-                    Hanabi_client.init();
+                    Hanabi_client = new GamePagePanel();
                     Hanabi_client.display();
                     if (rainbow.equals("none")) {
                         gameModel = new Game(response.hands, timer, false);
@@ -108,9 +108,12 @@ public class GUIHanabiSystem {
                     else {
                         gameModel = new Game(response.hands, timer, true);
                     }
-                    // game view initilize
+                    // game view initialize
                     coordinateSystem = new CoordinateSystem();
                     coordinateSystem.init();
+                    coordinateSystem.setGame(gameModel);
+                    gameModel.addListener(coordinateSystem);
+                    Hanabi_client.setGame(gameModel);
                 }
 
 
@@ -120,17 +123,15 @@ public class GUIHanabiSystem {
                     Hanabi_client.timer = new Timer();
                     Hanabi_client.AIA.setVisible(true);
                     // enable all acton listener
-                    coordinateSystem.addActionListeners();
                     gameModel.setYouTurn(true);
                     canceltimer = false;
                     // enable ai assistant
-                    Hanabi_client.AIA.addActionListener(MainListener.createAIAlistener(gameModel));
+                    Hanabi_client.aiButtonAddListener();
                     // if ai, go to ai package
-                    if (AI == false) {
+                    if (!AI) {
                         while (!canceltimer) {
                             Hanabi_client.updateCounter(gameModel.getTimer());
                         }
-
                     }
                     else {
                         ComputerController computerController = new ComputerController(gameModel);
@@ -164,7 +165,6 @@ public class GUIHanabiSystem {
                     }
                     gameModel.increaseCurrentPlayer();
                     gameModel.increaseinfotoken();
-                    CoordinateSystem.update(gameModel);
                 }
 
 
@@ -186,14 +186,17 @@ public class GUIHanabiSystem {
                         gameModel.changeCard(card, cardindex);
                         gameModel.increaseinfotoken();
                     }
-
                     gameModel.increaseCurrentPlayer();
-                    CoordinateSystem.update(gameModel);
+                    Hanabi_client.aiButtonRemoveListener();
                 }
 
+
+                // played card, to other;
                 if (response.notice.equals("played")) {
                     if (!response.card.equals("none")) {
+                        // add log --
                         CoordinateSystem.logWindow.append("\n" + Action.playaction(gameModel, response.position-1));
+                        //
                         gameModel.fireworkOrDiscard(gameModel.getHands().get(gameModel.getCurrentPlayer()).get(response.position-1));
                         Card card = Card.stringtocard(response.card, response.position);
                         gameModel.changeCard(card, (response.position));
@@ -210,10 +213,10 @@ public class GUIHanabiSystem {
 
                     }
                     gameModel.increaseCurrentPlayer();
-                    CoordinateSystem.update(gameModel);
-
                 }
 
+
+                // played card, to you
                 if (response.reply.equals("built")) {
                     if (Boolean.TRUE.equals(response.replaced)) {
                         Card card = new Card(response.position, 'q', 0);
@@ -231,9 +234,11 @@ public class GUIHanabiSystem {
                         gameModel.setHands(hands);
                     }
                     gameModel.increaseCurrentPlayer();
-                    CoordinateSystem.update(gameModel);
+                    Hanabi_client.aiButtonRemoveListener();
                 }
 
+
+                // burned card, to you
                 if (response.reply.equals("burned")) {
                     if (Boolean.TRUE.equals(response.replaced)) {
                         Card card = new Card(cardindex, 'q', 0);
@@ -252,7 +257,7 @@ public class GUIHanabiSystem {
                     }
                     gameModel.minusBlackFuseCounter();
                     gameModel.increaseCurrentPlayer();
-                    CoordinateSystem.update(gameModel);
+                    Hanabi_client.aiButtonRemoveListener();
                 }
 
 
@@ -267,7 +272,7 @@ public class GUIHanabiSystem {
                     }
                     gameModel.minusInfoCounter();
                     gameModel.increaseCurrentPlayer();
-                    CoordinateSystem.update(gameModel);
+                    Hanabi_client.aiButtonRemoveListener();
                 }
 
 
@@ -282,19 +287,21 @@ public class GUIHanabiSystem {
                     }
                     gameModel.minusInfoCounter();
                     gameModel.increaseCurrentPlayer();
-                    CoordinateSystem.update(gameModel);
                 }
+
 
                 if (response.reply.equals("game cancelled")){
                     System.exit(0);
                 }
+
+
                 if (response.reply.equals("game ends")){
-                    Message.infoBox("Game End", "Score = " + gameModel.getPoints());
+
                     System.exit(0);
                 }
             }
             catch (IOException e){
-                System.out.println("Error");
+                System.out.println("Error, check your connection");
                 break;
             }
         }
