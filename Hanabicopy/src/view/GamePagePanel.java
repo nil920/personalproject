@@ -18,6 +18,7 @@ public class GamePagePanel extends JLayeredPane{
     private JLabel lblBoard;
     private Counter counter;
     public JComboBox colors,ranks;
+    public JLabel pdcard;
     private Game game;
 
 
@@ -67,7 +68,14 @@ public class GamePagePanel extends JLayeredPane{
         Image image = img.getImage();
         Image newing = image.getScaledInstance(1366,768, Image.SCALE_SMOOTH);
         background = new ImageIcon(newing);
+
+        pdcard = new JLabel("");
+        pdcard.setFont((new Font("Time",Font.BOLD,12)));
+        pdcard.setForeground(Color.white);
+        pdcard.setBounds(900,680,400,50);
+        this.add(pdcard,JLayeredPane.MODAL_LAYER);
     }
+
 
     public void display() {
         this.add(play, JLayeredPane.MODAL_LAYER);

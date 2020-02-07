@@ -131,17 +131,8 @@ public class Game {
         for (int i =position-1; i< hands.get(currentPlayer).size();i++){
             hands.get(currentPlayer).get(i).setCardIndex(i+1);
         }
-
+        notifyCardRemove();
     }
-
-
-    public void removeYourHand(int position){
-        hands.get(currentPlayer).remove(position-1);
-        for (int i =position-1; i< hands.get(currentPlayer).size();i++){
-            hands.get(currentPlayer).get(i).setCardIndex(i+1);
-        }
-    }
-
 
 
     // add the parameter to discard;
@@ -304,7 +295,7 @@ public class Game {
                 hands.get(you).get(i).setRankKnown();
             }
         }
-        notyfiHint();
+        notifyHint();
     }
 
 
@@ -315,7 +306,7 @@ public class Game {
                 hands.get(you).get(i).setColorKnown();
             }
         }
-        notyfiHint();
+        notifyHint();
     }
 
 
@@ -483,9 +474,15 @@ public class Game {
     }
 
 
-    private void notyfiHint(){
+    private void notifyHint(){
         for (Subscriber i:subscribers){
             i.notifyHint();
+        }
+    }
+
+    private void notifyCardRemove(){
+        for (Subscriber i: subscribers){
+            i.notifyCurrentPlayerRemove();
         }
     }
 

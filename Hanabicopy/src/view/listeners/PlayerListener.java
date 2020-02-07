@@ -1,5 +1,7 @@
 package view.listeners;
 
+import startup.GUIHanabiSystem;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -9,7 +11,6 @@ public class PlayerListener extends MainListener{
     int player;
     boolean isSelected=false;
     boolean blocker= true;
-    private JLabel pdcard;
 
     public PlayerListener(int player){
         this.player = player;
@@ -43,17 +44,11 @@ public class PlayerListener extends MainListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        pdcard=new JLabel("Give information to player: "+ String.valueOf(player+1));
-        pdcard.setFont((new Font("Time",Font.BOLD,12)));
-        pdcard.setForeground(Color.white);
-        pdcard.setBounds(900,680,400,50);
-        startup.GUIHanabiSystem.Hanabi_client.panel.add(pdcard,JLayeredPane.MODAL_LAYER);
-        startup.GUIHanabiSystem.Hanabi_client.frame.repaint();
+        GUIHanabiSystem.Hanabi_client.pdcard.setText("Give information to player: "+ String.valueOf(player+1));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        startup.GUIHanabiSystem.Hanabi_client.panel.remove(pdcard);
-        startup.GUIHanabiSystem.Hanabi_client.frame.repaint();
+        GUIHanabiSystem.Hanabi_client.pdcard.setText("");
     }
 }

@@ -11,7 +11,6 @@ public interface Subscriber {
 
     // ACTION = DISCARD OR PLAY
     public void notifyDiscardChange();
-    public void notifyYourHandRemove();
     public void notifyHandChange();
     public void notifyFireworkChange();
     public void notifyCurrentPlayerRemove();

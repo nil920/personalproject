@@ -169,32 +169,40 @@ public class CoordinateSystem implements Subscriber{
     }
 
 
-    private void discardAddToPanel(JLabel[][] tobeadd){
-        for (int i =0; i< hand.size(); i++){
-            for (int j= 0 ; j < hand.get(i).size();j++){
-                ImageIcon discardi = new ImageIcon(CoordinateSystem.class.getResource( "/"+hand.get(i).get(j).getCardColor() + hand.get(i).get(j).getCardRank() +".jpg" ));
-                Image discardImage = discardi.getImage();
-                Image newdiscard = discardImage.getScaledInstance(50,83, Image.SCALE_SMOOTH);
-                tobeadd[i][j] = new JLabel( new ImageIcon (newdiscard));
-                tobeadd[i][j].setBounds(90+j*20,200+i*83,50,83);
-                Hanabi_client.add(tobeadd[i][j],JLayeredPane.MODAL_LAYER);
+    private void discardAddToPanel(){
+        LinkedList<LinkedList<Card>> discarded  =game.getDiscardedCard();
+        for (int i =0; i< discarded.size(); i++){
+            for (int j= 0 ; j < discarded.get(i).size();j++){
+                if (lbldiscard[i][j] == null){
+                    ImageIcon discard = new ImageIcon(CoordinateSystem.class.getResource( "/"+discarded.get(i).get(j).getCardColor() + discarded.get(i).get(j).getCardRank() +".jpg" ));
+                    Image discardImage = discard.getImage();
+                    Image discard_resized = discardImage.getScaledInstance(50,83, Image.SCALE_SMOOTH);
+                    lbldiscard[i][j] = new JLabel( new ImageIcon (discard_resized));
+                    lbldiscard[i][j].setBounds(90+j*20,200+i*83,50,83);
+                    Hanabi_client.add(lbldiscard[i][j],JLayeredPane.MODAL_LAYER);
+                }
             }
         }
     }
 
 
-    private void fireworkAddToPanel(JLabel[] tobeadd){
+    private void fireworkAddToPanel(){
         for (int i =0; i< game.getFirework().size(); i++){
             if (game.getFirework().get(i).size() ==0){
                 break;
             }
             ImageIcon fire = new ImageIcon(CoordinateSystem.class.getResource( "/"+game.getFirework().get(i).getLast().getCardColor()
                     + game.getFirework().get(i).getLast().getCardRank() +".jpg" ));
-            Image fireim = fire.getImage();
-            Image newfire = fireim.getScaledInstance(60,97, Image.SCALE_SMOOTH);
-            tobeadd[i] = new JLabel( new ImageIcon (newfire));
-            tobeadd[i].setBounds(90+70*i,70,60,97);
-            Hanabi_client.panel.add(tobeadd[i],JLayeredPane.MODAL_LAYER);
+            Image temp = fire.getImage();
+            Image firework_resized = temp.getScaledInstance(60,97, Image.SCALE_SMOOTH);
+            if (lblfirework[i] == null){
+                lblfirework[i] = new JLabel( new ImageIcon (firework_resized));
+                lblfirework[i].setBounds(90+70*i,70,60,97);
+                Hanabi_client.add(lblfirework[i],JLayeredPane.MODAL_LAYER);
+            }
+            else {
+                lblfirework[i].setIcon(new ImageIcon(firework_resized));
+            }
         }
     }
 
@@ -210,6 +218,7 @@ public class CoordinateSystem implements Subscriber{
             }
         }
     }
+
 
     public void disableActionListener(){
         LinkedList<Card> your_hand = game.getHands().get(game.getYou());
@@ -228,7 +237,7 @@ public class CoordinateSystem implements Subscriber{
     }
 
 
-    public void ChangeIcon(int player){
+    private void ChangeIcon(int player){
         int counter = 0;
         for (Card i : game.getHands().get(player)){
             ImageIcon img = new ImageIcon(CoordinateSystem.class.getResource ( "/"+i.getCardColor() +i.getCardRank() +".jpg" ));
@@ -237,6 +246,11 @@ public class CoordinateSystem implements Subscriber{
             lblCard[player][counter].setIcon(new ImageIcon(newing));
             counter++;
         }
+    }
+
+    private void cardRemove(int player){
+        Hanabi_client.remove(lblCard[player][game.getHands().get(player).size()-1]);
+        ChangeIcon(player);
     }
 
 
@@ -272,22 +286,17 @@ public class CoordinateSystem implements Subscriber{
 
     @Override
     public void notifyFireworkChange() {
-
+        fireworkAddToPanel();
     }
 
     @Override
     public void notifyCurrentPlayerRemove() {
-
+        cardRemove(game.getCurrentPlayer());
     }
 
     @Override
     public void notifyDiscardChange() {
-
-    }
-
-    @Override
-    public void notifyYourHandRemove() {
-
+        discardAddToPanel();
     }
 
     @Override
@@ -304,6 +313,4 @@ public class CoordinateSystem implements Subscriber{
     public void notifyHint() {
         ChangeIcon(game.getYou());
     }
-
-
 }

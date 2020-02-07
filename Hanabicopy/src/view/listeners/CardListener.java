@@ -1,6 +1,8 @@
 package view.listeners;
 
 import model.Card;
+import startup.GUIHanabiSystem;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -9,7 +11,6 @@ import java.awt.event.MouseEvent;
 public class CardListener extends MainListener{
 
     private Card card;
-    private JLabel pdcard;
 
 
 
@@ -51,15 +52,11 @@ public class CardListener extends MainListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        pdcard=new JLabel("Play / Discard card number: "+ String.valueOf(card.getCardIndex()));
-        pdcard.setFont((new Font("Time",Font.BOLD,12)));
-        pdcard.setForeground(Color.white);
-        pdcard.setBounds(900,680,400,50);
-        startup.GUIHanabiSystem.Hanabi_client.panel.add(pdcard,JLayeredPane.MODAL_LAYER);
+        GUIHanabiSystem.Hanabi_client.pdcard.setText("Play / Discard card number: "+ card.getCardIndex());
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        startup.GUIHanabiSystem.Hanabi_client.panel.remove(pdcard);
+        GUIHanabiSystem.Hanabi_client.pdcard.setText("");
     }
 }
