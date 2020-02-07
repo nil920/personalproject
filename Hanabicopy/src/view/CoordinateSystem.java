@@ -102,7 +102,7 @@ public class CoordinateSystem implements Subscriber{
     // using game model to initialize
     public void init(){
         // init hands of players
-        inithands(game);
+        inithands();
 
         // player label for selection. only need to do once.
         for (int i =0; i< game.getHands().size();i++){
@@ -161,7 +161,7 @@ public class CoordinateSystem implements Subscriber{
     }
 
 
-    private void inithands(Game game){
+    private void inithands(){
         LinkedList<LinkedList<Card>> hand = game.getHands();
         for (int i =0; i< hand.size(); i++){
             for (int j= 0 ; j < hand.get(i).size();j++){
@@ -295,17 +295,21 @@ public class CoordinateSystem implements Subscriber{
 
     @Override
     public void notifyInfoTokenChange() {
-
+        info.setText(String.valueOf(game.getInfoToken()));
     }
 
     @Override
     public void notifyFuseTokenChange() {
-
+        fuse.setText(String.valueOf(game.getBlackFuseCounter()));
     }
 
     @Override
     public void notifyCurrentPlayerChange() {
-
+        int i = game.getCurrentPlayer();
+        ImageIcon img = new ImageIcon(CoordinateSystem.class.getResource("/player"+String.valueOf(i+1)+".png" ));
+        Image image = img.getImage();
+        Image newing = image.getScaledInstance(150,80, Image.SCALE_SMOOTH);
+        CurrentPlayer.setIcon(new ImageIcon(newing));
     }
 
     @Override
@@ -322,4 +326,11 @@ public class CoordinateSystem implements Subscriber{
     public void addActionListener() {
         addActionListeners();
     }
+
+    @Override
+    public void disableActionListner() {
+        disableActionListener();
+    }
+
+
 }

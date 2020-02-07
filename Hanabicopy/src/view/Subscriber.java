@@ -9,4 +9,5 @@ public interface Subscriber {
     public void notifyFireworkChange();
     public void notifyDiscardChange();
     public void addActionListener();
+    public void disableActionListner();
 }

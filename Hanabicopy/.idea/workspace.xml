@@ -2,23 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cef17178-54b1-4273-bef3-e3e67166215b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/MovesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/MovesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/startup/GUIHanabiSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/startup/GUIHanabiSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CoordinateSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CoordinateSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Subscriber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/CardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/CardListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/DiscardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/DiscardListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/GiveColorActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/GiveColorActionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/GiveColorListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/GiveColorListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/GiveRankActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/GiveRankActionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/GiveRankListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/GiveRankListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/MainListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/MainListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/PlayActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/PlayActionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/PlayerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/PlayerListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/ThemeMainListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/ThemeMainListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +65,7 @@
       <updated>1580967554845</updated>
       <workItem from="1580967557676" duration="1036000" />
       <workItem from="1581011235211" duration="2199000" />
-      <workItem from="1581032408205" duration="4578000" />
+      <workItem from="1581032408205" duration="5063000" />
     </task>
     <servers />
   </component>
