@@ -199,6 +199,7 @@ public class CoordinateSystem implements Subscriber{
                 lblfirework[i] = new JLabel( new ImageIcon (firework_resized));
                 lblfirework[i].setBounds(90+70*i,70,60,97);
                 Hanabi_client.add(lblfirework[i],JLayeredPane.MODAL_LAYER);
+                Hanabi_client.repaint();
             }
             else {
                 lblfirework[i].setIcon(new ImageIcon(firework_resized));
@@ -287,6 +288,7 @@ public class CoordinateSystem implements Subscriber{
     @Override
     public void notifyFireworkChange() {
         fireworkAddToPanel();
+        ChangeIcon(game.getCurrentPlayer());
     }
 
     @Override
@@ -297,6 +299,7 @@ public class CoordinateSystem implements Subscriber{
     @Override
     public void notifyDiscardChange() {
         discardAddToPanel();
+        ChangeIcon(game.getCurrentPlayer());
     }
 
     @Override
