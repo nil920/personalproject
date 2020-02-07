@@ -9,10 +9,8 @@ import model.Card;
 import model.Game;
 import model.Waitingroom;
 import view.*;
-import view.listeners.MainListener;
 
 import java.io.IOException;
-import java.util.LinkedList;
 
 /**
  * A class that starts up the Hanabi System GUI
@@ -24,9 +22,9 @@ public class GUIHanabiSystem {
     public static Game gameModel;
     private static int timer;
     private static String rainbow;
-    private static WaitingRoom waitingroomView;
-    public static int cardindex;
-    public static boolean canceltimer;
+    private static WaitingRoom waitingRoomView;
+    public static int cardIndex;
+    public static boolean cancelTimer;
     public static GamePagePanel Hanabi_client;
     public static boolean AI = false;
 
@@ -77,9 +75,9 @@ public class GUIHanabiSystem {
                     }else{
                         waitingRoomModel = new Waitingroom(gameid, token, 300, response.needed);
                     }
-                    waitingroomView = new WaitingRoom();
-                    waitingroomView.init(waitingRoomModel);
-                    waitingroomView.setVisible(true);
+                    waitingRoomView = new WaitingRoom();
+                    waitingRoomView.init(waitingRoomModel);
+                    waitingRoomView.setVisible(true);
                     timer = response.timeout;
                     rainbow = response.rainbow;
                 }
@@ -87,19 +85,19 @@ public class GUIHanabiSystem {
                 // player left waiting room
                 if (response.notice.equals("player left")) {
                     waitingRoomModel.setPlayersNeeded(response.needed);
-                    waitingroomView.update(waitingRoomModel);
+                    waitingRoomView.update(waitingRoomModel);
                 }
                 // player joined
                 if (response.notice.equals("player joined")) {
                     waitingRoomModel.setPlayersNeeded(response.needed);
-                    waitingroomView.update(waitingRoomModel);
+                    waitingRoomView.update(waitingRoomModel);
                 }
 
 
                 // -------------------game stage--------------------------------------
                 //game start
                 if (response.notice.equals("game starts")) {
-                    waitingroomView.dispose();
+                    waitingRoomView.dispose();
                     Hanabi_client = new GamePagePanel();
                     Hanabi_client.setGame(gameModel);
                     Hanabi_client.display();
@@ -125,12 +123,12 @@ public class GUIHanabiSystem {
                     Hanabi_client.AIA.setVisible(true);
                     // enable all acton listener
                     gameModel.setYouTurn(true);
-                    canceltimer = false;
+                    cancelTimer = false;
                     // enable ai assistant
                     Hanabi_client.aiButtonAddListener();
                     // if ai, go to ai package
                     if (!AI) {
-                        while (!canceltimer) {
+                        while (!cancelTimer) {
                             Hanabi_client.updateCounter(gameModel.getTimer());
                         }
                     }
@@ -165,13 +163,13 @@ public class GUIHanabiSystem {
 
                 if (response.reply.equals("accepted")) {
                     if (Boolean.FALSE.equals(response.replaced)){
-                        gameModel.removeCurrentPlayerHand(cardindex);
+                        gameModel.removeCurrentPlayerHand(cardIndex);
                     }
                     if (Boolean.TRUE.equals(response.replaced)) {
-                        Card card = new Card(cardindex, 'q', 0);
+                        Card card = new Card(cardIndex, 'q', 0);
                         Card old_card = Card.stringtocard(response.card,0);
                         gameModel.addToDiscard(old_card);
-                        gameModel.changeCard(card, cardindex);
+                        gameModel.changeCard(card, cardIndex);
                     }
                     gameModel.increaseinfotoken();
                     gameModel.setYouTurn(false);
@@ -217,8 +215,8 @@ public class GUIHanabiSystem {
                 // burned card, to you
                 if (response.reply.equals("burned")) {
                     if (Boolean.TRUE.equals(response.replaced)) {
-                        Card card = new Card(cardindex, 'q', 0);
-                        gameModel.changeCard(card, cardindex);
+                        Card card = new Card(cardIndex, 'q', 0);
+                        gameModel.changeCard(card, cardIndex);
 
                         gameModel.addToDiscard(Card.stringtocard(response.card,0));
                     }

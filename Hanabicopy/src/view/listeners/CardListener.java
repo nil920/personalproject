@@ -3,8 +3,6 @@ package view.listeners;
 import model.Card;
 import startup.GUIHanabiSystem;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
@@ -20,8 +18,8 @@ public class CardListener extends MainListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        startup.GUIHanabiSystem.Hanabi_client.setplaydisButtonDisplay(true);
-        startup.GUIHanabiSystem.Hanabi_client.setcardrankbuttonDisplay(false);
+        startup.GUIHanabiSystem.Hanabi_client.setPlayButtonDisplay(true);
+        startup.GUIHanabiSystem.Hanabi_client.setCardRankButtonDisplay(false);
         startup.GUIHanabiSystem.Hanabi_client.give.setVisible(false);
 
 

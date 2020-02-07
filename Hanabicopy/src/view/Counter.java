@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.*;
 
-public class Counter extends JLabel {
+public class Counter extends JLabel{
 
     public Counter() {
         this.setIcon(new ImageIcon(getClass().getResource("/ProcessTile.PNG")));

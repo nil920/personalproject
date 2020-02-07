@@ -2,8 +2,6 @@ package view.listeners;
 
 import startup.GUIHanabiSystem;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
@@ -19,8 +17,8 @@ public class PlayerListener extends MainListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         isSelected = true;
-        startup.GUIHanabiSystem.Hanabi_client.setcardrankbuttonDisplay(true);
-        startup.GUIHanabiSystem.Hanabi_client.setplaydisButtonDisplay(false);
+        startup.GUIHanabiSystem.Hanabi_client.setCardRankButtonDisplay(true);
+        startup.GUIHanabiSystem.Hanabi_client.setPlayButtonDisplay(false);
         startup.GUIHanabiSystem.Hanabi_client.give.setVisible(false);
         startup.GUIHanabiSystem.Hanabi_client.frame.repaint();
         if (blocker) {

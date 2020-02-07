@@ -1,50 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cef17178-54b1-4273-bef3-e3e67166215b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hanabicopy/model/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hanabicopy/model/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hanabicopy/startup/GUIHanabiSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hanabicopy/startup/GUIHanabiSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Hanabicopy/view/CoordinateSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hanabicopy/view/CoordinateSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/startup/GUIHanabiSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/startup/GUIHanabiSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CoordinateSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CoordinateSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Subscriber.java" afterDir="false" />
-    </list>
+    <list default="true" id="c8cb01bd-489e-452a-b30c-89d2135d0477" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-        <option value="Interface" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="ProjectId" id="1XQ9fY2ydX2utSC8mVjcwvPlUwu" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1XUMzNyurMXeGaL5JzfhM1HxnWB" />
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/hanabi/hanabiserver" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="H:/Hanabi/hanabiserver" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="H:\personal\personalproject\Hanabicopy\src\view" />
-    </key>
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -83,53 +55,25 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="cef17178-54b1-4273-bef3-e3e67166215b" name="Default Changelist" comment="" />
-      <created>1580967554845</created>
+      <changelist id="c8cb01bd-489e-452a-b30c-89d2135d0477" name="Default Changelist" comment="" />
+      <created>1581096492458</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1580967554845</updated>
-      <workItem from="1580967557676" duration="1036000" />
-      <workItem from="1581011235211" duration="2199000" />
-      <workItem from="1581032408205" duration="18618000" />
+      <updated>1581096492458</updated>
+      <workItem from="1581096519691" duration="2505000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/view/CoordinateSystem.java</url>
-          <line>171</line>
-          <properties class="view.CoordinateSystem" method="discardAddToPanel">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/CoordinateSystem.java</url>
-          <line>242</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/CoordinateSystem.java</url>
-          <line>247</line>
-          <option name="timeStamp" value="22" />
+          <url>file://$PROJECT_DIR$/src/startup/GUIHanabiSystem.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

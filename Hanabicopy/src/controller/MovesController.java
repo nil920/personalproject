@@ -18,7 +18,7 @@ public class MovesController
         controller.gson.PlayDiscardMessage playCard = new PlayDiscardMessage("play",cardIndex);
         Gson playGson = new Gson();
         String msg = playGson.toJson(playCard);
-        GUIHanabiSystem.canceltimer =true;
+        GUIHanabiSystem.cancelTimer =true;
         try {
 //            send data to server
             ConnectToServer.sendMessageToServer(msg);
@@ -34,7 +34,7 @@ public class MovesController
         PlayDiscardMessage discardCard = new PlayDiscardMessage("discard",cardIndex);
         Gson discardGson = new Gson();
         String msg = discardGson.toJson(discardCard);
-        GUIHanabiSystem.canceltimer =true;
+        GUIHanabiSystem.cancelTimer =true;
         try {
 //            send data to server
             ConnectToServer.sendMessageToServer(msg);
@@ -50,7 +50,7 @@ public class MovesController
         controller.gson.GivenInfoSuit givenInfoSuit = new GivenInfoSuit("inform",indexOfPlayer,suit);
         Gson clueSuitGson = new Gson();
         String msg = clueSuitGson.toJson(givenInfoSuit);
-        GUIHanabiSystem.canceltimer =true;
+        GUIHanabiSystem.cancelTimer =true;
         try {
 //            send data to server
             ConnectToServer.sendMessageToServer(msg);
@@ -66,7 +66,7 @@ public class MovesController
         controller.gson.GivenInfoInt givenInfoSuit = new controller.gson.GivenInfoInt("inform",indexOfPlayer,rank);
         Gson clueRankGson = new Gson();
         String msg = clueRankGson.toJson(givenInfoSuit);
-        GUIHanabiSystem.canceltimer =true;
+        GUIHanabiSystem.cancelTimer =true;
         try {
             ConnectToServer.sendMessageToServer(msg);
         }

@@ -12,8 +12,8 @@ public class GiveColorListener extends MainListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        startup.GUIHanabiSystem.Hanabi_client.setcardrankbuttonDisplay(false);
-        startup.GUIHanabiSystem.Hanabi_client.setplaydisButtonDisplay(false);
+        startup.GUIHanabiSystem.Hanabi_client.setCardRankButtonDisplay(false);
+        startup.GUIHanabiSystem.Hanabi_client.setPlayButtonDisplay(false);
         startup.GUIHanabiSystem.Hanabi_client.colors.setVisible(true);
         startup.GUIHanabiSystem.Hanabi_client.give.setVisible(true);
         if (startup.GUIHanabiSystem.Hanabi_client.give.getActionListeners().length == 0){
