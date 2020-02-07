@@ -16,3 +16,10 @@ Client side:
 Error in:
 display error
 {"reply":"inform","rank":2,"info":[false,true,false,false,false]}
+
+
+index error, display error:
+{"reply":"built","card":"g1","replaced":true,"position":5}
+
+
+{"reply":"accepted","replaced":true,"card":"y3"}
