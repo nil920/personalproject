@@ -31,6 +31,9 @@ public class Card{
         return cardRank;
     }
 
+    public void setCardIndex(int cardIndex) {
+        this.cardIndex = cardIndex;
+    }
 
     public static Card stringtocard(String string, int index) {
         char Color = string.charAt(0);

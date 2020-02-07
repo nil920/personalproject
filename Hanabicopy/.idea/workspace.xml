@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cef17178-54b1-4273-bef3-e3e67166215b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/startup/GUIHanabiSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/startup/GUIHanabiSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/CoordinateSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CoordinateSystem.java" afterDir="false" />
@@ -32,7 +33,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/hanabi/hanabiserver" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -68,7 +69,7 @@
       <updated>1580967554845</updated>
       <workItem from="1580967557676" duration="1036000" />
       <workItem from="1581011235211" duration="2199000" />
-      <workItem from="1581032408205" duration="8968000" />
+      <workItem from="1581032408205" duration="11038000" />
     </task>
     <servers />
   </component>

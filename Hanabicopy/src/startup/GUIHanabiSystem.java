@@ -157,7 +157,7 @@ public class GUIHanabiSystem {
                         // remove the discarded card of current player's hand
                         LinkedList<LinkedList<Card>> hands = gameModel.getHands();
                         for (int i = 0; i < hands.get(gameModel.getCurrentPlayer()+1).size(); i++) {
-                            if (hands.get(gameModel.getCurrentPlayer()+1).get(i).getCardIndex() == cardindex) {
+                            if (hands.get(gameModel.getCurrentPlayer()+1).get(i).getCardIndex() == response.position) {
                                 hands.get(gameModel.getCurrentPlayer()+1).remove(i);
                             }
                         }

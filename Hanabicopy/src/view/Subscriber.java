@@ -1,14 +1,28 @@
 package view;
 
 public interface Subscriber {
+    // COUNTER TYPE
     public void notifyPointChange();
-    public void notifyHandChange();
     public void notifyInfoTokenChange();
     public void notifyFuseTokenChange();
-    public void notifyCurrentPlayerChange();
-    public void notifyFireworkChange();
+
+    // ACTION = INFO
+    public void notifyHint();
+
+    // ACTION = DISCARD OR PLAY
     public void notifyDiscardChange();
+    public void notifyYourHandRemove();
+    public void notifyHandChange();
+    public void notifyFireworkChange();
+    public void notifyCurrentPlayerRemove();
+
+
+    public void notifyCurrentPlayerChange();
+
+
+
+    // ACTION LISTENER
     public void addActionListener();
     public void disableActionListner();
-    public void notifyHint();
+
 }

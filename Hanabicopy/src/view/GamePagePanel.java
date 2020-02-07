@@ -7,13 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class GamePagePanel {
+public class GamePagePanel extends JLayeredPane{
 
     public Timer timer;
     public ImageIcon background=new ImageIcon(GamePagePanel.class.getResource("/background2.png"));
-    public JLayeredPane panel = new JLayeredPane();
     public JFrame frame;
-    public Menu menu;
+    private Menu menu;
     public JButton play,discard,give,AIA;
     public JButton color,rank;
     private JLabel lblBoard;
@@ -31,10 +30,10 @@ public class GamePagePanel {
 
         menu = new Menu();
 
-        panel.add(lblBoard, JLayeredPane.DEFAULT_LAYER);
+        this.add(lblBoard, JLayeredPane.DEFAULT_LAYER);
 
         frame = new GamePageFrame();
-        frame.setLayeredPane(panel);
+        frame.setLayeredPane(this);
         frame.setJMenuBar(menu);
         frame.setVisible(true);
 
@@ -71,15 +70,15 @@ public class GamePagePanel {
     }
 
     public void display() {
-        panel.add(play, JLayeredPane.MODAL_LAYER);
-        panel.add(discard, JLayeredPane.MODAL_LAYER);
-        panel.add(rank, JLayeredPane.MODAL_LAYER);
-        panel.add(color,JLayeredPane.MODAL_LAYER);
-        panel.add(give,JLayeredPane.MODAL_LAYER);
-        panel.add(AIA,JLayeredPane.MODAL_LAYER);
-        panel.add(counter, JLayeredPane.MODAL_LAYER);
-        panel.add(colors,JLayeredPane.MODAL_LAYER);
-        panel.add(ranks,JLayeredPane.MODAL_LAYER);
+        this.add(play, JLayeredPane.MODAL_LAYER);
+        this.add(discard, JLayeredPane.MODAL_LAYER);
+        this.add(rank, JLayeredPane.MODAL_LAYER);
+        this.add(color,JLayeredPane.MODAL_LAYER);
+        this.add(give,JLayeredPane.MODAL_LAYER);
+        this.add(AIA,JLayeredPane.MODAL_LAYER);
+        this.add(counter, JLayeredPane.MODAL_LAYER);
+        this.add(colors,JLayeredPane.MODAL_LAYER);
+        this.add(ranks,JLayeredPane.MODAL_LAYER);
         setBoardAppearance(background);
         AIA.setVisible(true);
         play.setVisible(false);
@@ -93,12 +92,12 @@ public class GamePagePanel {
 
     public void updateCounter(int timer1) {
         counter.setSizeOnRemainingSeconds((int) timer.listen(timer1));
-        panel.repaint();
+        this.repaint();
     }
 
     public void setBoardAppearance(ImageIcon path) {
         lblBoard.setIcon(path);
-        panel.repaint();
+        this.repaint();
     }
 
     public void setplaydisButtonDisplay(boolean flag){

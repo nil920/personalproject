@@ -126,6 +126,24 @@ public class Game {
     }
 
 
+    public void removeCurrentPlayerHand(int position){
+        hands.get(currentPlayer).remove(position-1);
+        for (int i =position-1; i< hands.get(currentPlayer).size();i++){
+            hands.get(currentPlayer).get(i).setCardIndex(i+1);
+        }
+
+    }
+
+
+    public void removeYourHand(int position){
+        hands.get(currentPlayer).remove(position-1);
+        for (int i =position-1; i< hands.get(currentPlayer).size();i++){
+            hands.get(currentPlayer).get(i).setCardIndex(i+1);
+        }
+    }
+
+
+
     // add the parameter to discard;
     // add listener ----------------------------------
     public void addToDiscard(Card card) {
