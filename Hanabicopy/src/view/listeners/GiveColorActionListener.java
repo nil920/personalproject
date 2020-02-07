@@ -15,9 +15,9 @@ public class GiveColorActionListener extends MainListener{
     //"Red", "Green", "Yellow", "Blue", "White","Rainbow"
     @Override
     public void actionPerformed(ActionEvent e) {
-        cardcolor = (String.valueOf( startup.GUIHanabiSystem.Hanabiclient.colors.getSelectedItem()));
+        cardcolor = (String.valueOf( startup.GUIHanabiSystem.Hanabi_client.colors.getSelectedItem()));
         System.out.println(cardcolor);
         MovesController.giveClueSuit(playerid,cardcolor);
-        startup.GUIHanabiSystem.Hanabiclient.disableallbutton();
+        startup.GUIHanabiSystem.Hanabi_client.disableallbutton();
     }
 }

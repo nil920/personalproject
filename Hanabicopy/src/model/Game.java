@@ -34,11 +34,16 @@ public class Game {
     private int you;
     // your turn?
     private  boolean youTurn;
+    // points
+    private int points;
     // listeners
-    private ArrayList<Subscriber> point_listener;
-    private ArrayList<Subscriber> card_change_listener;
-    private ArrayList<Subscriber> fuse_token_listener;
-    private ArrayList<Subscriber> info_token_listener;
+    private ArrayList<Subscriber> subscribers;
+
+
+    // for change hand;
+    private int changed_player;
+    private int changed_int;
+
 
 
     // init
@@ -58,6 +63,7 @@ public class Game {
         this.currentPlayer=0;
         this.lastTurn=false;
 
+        points = 0;
 
         if(rainbow)
         {
@@ -93,28 +99,30 @@ public class Game {
     }
 
     // add listener ----------------------------------
-    public int getPoints()
+    public void addPoints()
     {
-        int points = 0;
+        points++;
+        notifyPoint_listener();
+    }
 
-        for(int i = 0 ; i < firework.size(); i++)
-        {
-            points+= firework.get(i).size();
-        }
-
+    public int getPoints(){
         return points;
     }
+
+
 
 
     // add listener ------------------------------------
     public void minusBlackFuseCounter()
     {
         this.blackFuseCounter--;
+        notifyFuse_token_listener();
     }
 
     public void minusInfoCounter()
     {
         this.inforTokenCounter--;
+        notifyInfo_token_listener();
     }
 
 
@@ -135,7 +143,7 @@ public class Game {
         }
 
         //if the firework of that colour doesnt exist yet
-        if(found == false)
+        if(!found)
         {
             for(int i = 0; i < this.discardedcard.size(); i++)
             {
@@ -146,6 +154,7 @@ public class Game {
                 }
             }
         }
+        notifyDiscard_change();
     }
 
 
@@ -173,6 +182,8 @@ public class Game {
                 }
             }
         }
+        notifyFirework_change();
+        addPoints();
     }
 
 
@@ -184,6 +195,7 @@ public class Game {
         }
         else {
             inforTokenCounter++;
+            notifyInfo_token_listener();
         }
     }
 
@@ -196,27 +208,32 @@ public class Game {
         else{
             this.currentPlayer ++;
         }
+        notifyCurrent_Player_change();
     }
 
     // add listener ----------------------------------
     // probably not set, but remove some card from hands
     public void setHands(LinkedList<LinkedList<Card>> hands) {
         this.hands = hands;
+        notifyHand_change();
     }
 
     // add listener ----------------------------------
     public void changeCard(Card card, int pos)
     {
-        for (int i = 0; i < hands.get(currentPlayer).size(); i++) {
-            if (hands.get(currentPlayer).get(i).getCardIndex() == pos) {
+        LinkedList <Card> currentplayerhand = hands.get(currentPlayer);
+        for (int i = 0; i < currentplayerhand.size(); i++) {
+            if (currentplayerhand.get(i).getCardIndex() == pos) {
                 hands.get(currentPlayer).set(i,card);
             }
         }
+        notifyHand_change();
     }
 
     // add listener ----------------------------------
     public void setYouTurn(boolean youTurn) {
         this.youTurn = youTurn;
+        notifyYou_Turn();
     }
 
 
@@ -260,20 +277,22 @@ public class Game {
         for (int i =0; i<listhint.size();i++){
             if (listhint.get(i))
             {
-                hands.get(getYou()).get(i).setCardRank(hint);
-                hands.get(getYou()).get(i).setRankKnown();
+                hands.get(you).get(i).setCardRank(hint);
+                hands.get(you).get(i).setRankKnown();
             }
         }
+        notifyHand_change();
     }
 
 
     public void colorHintToHand(char color, LinkedList<Boolean> listhint){
         for (int i =0; i<listhint.size();i++){
             if (listhint.get(i)) {
-                hands.get(getYou()).get(i).setCardColor(color);
-                hands.get(getYou()).get(i).setRankKnown();
+                hands.get(you).get(i).setCardColor(color);
+                hands.get(you).get(i).setColorKnown();
             }
         }
+        notifyHand_change();
     }
 
 
@@ -324,7 +343,7 @@ public class Game {
     }
 
     // for data collecting
-    public void writetocsv(String action,int position, String suit, int rank){
+    public void writeToCSV(String action, int position, String suit, int rank){
         try {
             FileWriter output = new FileWriter(file,true);
             ArrayList<String> result = new ArrayList<>();
@@ -382,45 +401,63 @@ public class Game {
         }
     }
 
-    public void notifyPoint_listener() {
-        for (Subscriber i: point_listener){
-            i.notifythis();
+    private void notifyPoint_listener() {
+        for (Subscriber i: subscribers){
+            i.notifyPointChange();
         }
     }
 
-    public void addPoint_listener(Subscriber subscriber) {
-        this.point_listener.add(subscriber);
+    public void addListener(Subscriber subscriber) {
+        this.subscribers.add(subscriber);
     }
 
-    public void notifyCard_change_listener() {
-        for (Subscriber i: card_change_listener){
-            i.notifythis();
+    private void notifyCard_change_listener() {
+        for (Subscriber i: subscribers){
+            i.notifyHandChange();
         }
     }
 
-    public void addCard_change_listener(Subscriber subscriber) {
-        this.card_change_listener.add(subscriber);
-    }
 
-
-    public void notifyFuse_token_listener() {
-        for (Subscriber i: fuse_token_listener){
-            i.notifythis();
+    private void notifyFuse_token_listener() {
+        for (Subscriber i: subscribers){
+            i.notifyFuseTokenChange();
         }
     }
 
-    public void addFuse_token_listener(Subscriber subscriber) {
-        this.fuse_token_listener.add(subscriber);
-    }
-
-    public void notifyInfo_token_listener() {
-        for (Subscriber i: info_token_listener){
-            i.notifythis();
+    private void notifyInfo_token_listener() {
+        for (Subscriber i: subscribers){
+            i.notifyInfoTokenChange();
         }
     }
 
-    public void addInfo_token_listener(Subscriber subscriber) {
-        this.info_token_listener.add(subscriber);
+    private void notifyHand_change(){
+        for (Subscriber i : subscribers){
+            i.notifyHandChange();
+        }
+    }
+
+    private void notifyFirework_change(){
+        for (Subscriber i: subscribers){
+            i.notifyFireworkChange();
+        }
+    }
+
+    private void notifyDiscard_change(){
+        for (Subscriber i: subscribers){
+            i.notifyDiscardChange();
+        }
+    }
+
+    private void notifyCurrent_Player_change(){
+        for (Subscriber i: subscribers){
+            i.notifyCurrentPlayerChange();
+        }
+    }
+
+    private void notifyYou_Turn(){
+        for (Subscriber i: subscribers){
+            i.addActionListener();
+        }
     }
 
 

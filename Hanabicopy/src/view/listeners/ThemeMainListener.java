@@ -13,7 +13,7 @@ public class ThemeMainListener extends MainListener {
             this.backgroundImage = backgroundImage; };
 
     public void actionPerformed(ActionEvent arg0) {
-        GamePagePanel view = startup.GUIHanabiSystem.Hanabiclient;
+        GamePagePanel view = startup.GUIHanabiSystem.Hanabi_client;
         view.background = backgroundImage;
         view.setBoardAppearance(backgroundImage); }
 }

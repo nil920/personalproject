@@ -12,18 +12,18 @@ public class GiveColorListener extends MainListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        startup.GUIHanabiSystem.Hanabiclient.setcardrankbuttonDisplay(false);
-        startup.GUIHanabiSystem.Hanabiclient.setplaydisButtonDisplay(false);
-        startup.GUIHanabiSystem.Hanabiclient.colors.setVisible(true);
-        startup.GUIHanabiSystem.Hanabiclient.give.setVisible(true);
-        if (startup.GUIHanabiSystem.Hanabiclient.give.getActionListeners().length == 0){
-            startup.GUIHanabiSystem.Hanabiclient.give.addActionListener(new GiveColorActionListener(playerid));
+        startup.GUIHanabiSystem.Hanabi_client.setcardrankbuttonDisplay(false);
+        startup.GUIHanabiSystem.Hanabi_client.setplaydisButtonDisplay(false);
+        startup.GUIHanabiSystem.Hanabi_client.colors.setVisible(true);
+        startup.GUIHanabiSystem.Hanabi_client.give.setVisible(true);
+        if (startup.GUIHanabiSystem.Hanabi_client.give.getActionListeners().length == 0){
+            startup.GUIHanabiSystem.Hanabi_client.give.addActionListener(new GiveColorActionListener(playerid));
         }
         else {
-            for (ActionListener g: startup.GUIHanabiSystem.Hanabiclient.give.getActionListeners()){
-                startup.GUIHanabiSystem.Hanabiclient.give.removeActionListener(g);
+            for (ActionListener g: startup.GUIHanabiSystem.Hanabi_client.give.getActionListeners()){
+                startup.GUIHanabiSystem.Hanabi_client.give.removeActionListener(g);
             }
-            startup.GUIHanabiSystem.Hanabiclient.give.addActionListener(new GiveColorActionListener(playerid));
+            startup.GUIHanabiSystem.Hanabi_client.give.addActionListener(new GiveColorActionListener(playerid));
         }
     }
 }

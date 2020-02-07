@@ -14,6 +14,6 @@ public class PlayActionListener extends MainListener {
     public void actionPerformed(ActionEvent e) {
         startup.GUIHanabiSystem.cardindex = cardid;
         MovesController.play(cardid);
-        startup.GUIHanabiSystem.Hanabiclient.disableallbutton();
+        startup.GUIHanabiSystem.Hanabi_client.disableallbutton();
     }
 }

@@ -5,11 +5,12 @@ import model.Game;
 import view.listeners.MainListener;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
-import static startup.GUIHanabiSystem.Hanabiclient;
+import static startup.GUIHanabiSystem.Hanabi_client;
 
-public class CoordinateSystem {
+public class CoordinateSystem implements Subscriber{
     private static JLabel[][] lblCard = new JLabel[6][6];
     private static JLabel[] lblPlayer=new JLabel[5];
     private static JLabel boardPlayedCard,boardDiscards,infoCounter,fuseCounter,currentPlayerB,totalpoint;
@@ -20,10 +21,10 @@ public class CoordinateSystem {
     private static JLabel[] lblfirework=new JLabel[6];
     public static JLabel pdcard;
     public static JTextArea logWindow;
+    private static Game game;
 
 
-    public static void initboard()
-    {
+    public CoordinateSystem() {
         /*
           the things not needed to change when model change, icon and backgrounds;
          */
@@ -34,7 +35,7 @@ public class CoordinateSystem {
         Image newing = image.getScaledInstance(420,120, Image.SCALE_SMOOTH);
         boardPlayedCard= new JLabel( new ImageIcon (newing));
         boardPlayedCard.setBounds(90,60,420,120);
-        Hanabiclient.panel.add(boardPlayedCard,JLayeredPane.PALETTE_LAYER);
+        Hanabi_client.panel.add(boardPlayedCard,JLayeredPane.PALETTE_LAYER);
 
 
         // discard card; add background
@@ -44,7 +45,7 @@ public class CoordinateSystem {
         Image newing1 = image1.getScaledInstance(420,500, Image.SCALE_SMOOTH);
         boardDiscards= new JLabel( new ImageIcon (newing1));
         boardDiscards.setBounds(90,200,420,500);
-        Hanabiclient.panel.add(boardDiscards,JLayeredPane.PALETTE_LAYER);
+        Hanabi_client.panel.add(boardDiscards,JLayeredPane.PALETTE_LAYER);
 
 
         // info counter, add a icon
@@ -54,7 +55,7 @@ public class CoordinateSystem {
         Image newing2 = image2.getScaledInstance(50,50, Image.SCALE_SMOOTH);
         infoCounter= new JLabel( new ImageIcon (newing2));
         infoCounter.setBounds(550,170,50,50);
-        Hanabiclient.panel.add(infoCounter,JLayeredPane.MODAL_LAYER);
+        Hanabi_client.panel.add(infoCounter,JLayeredPane.MODAL_LAYER);
 
 
         // fuse counter icon
@@ -64,7 +65,7 @@ public class CoordinateSystem {
         Image newfuse = imgefuse.getScaledInstance(50,50, Image.SCALE_SMOOTH);
         fuseCounter= new JLabel( new ImageIcon (newfuse));
         fuseCounter.setBounds(550,220,50,50);
-        Hanabiclient.panel.add(fuseCounter,JLayeredPane.MODAL_LAYER);
+        Hanabi_client.panel.add(fuseCounter,JLayeredPane.MODAL_LAYER);
 
 
         // current player text:
@@ -72,7 +73,7 @@ public class CoordinateSystem {
         currentPlayerB.setFont((new Font("Time",Font.BOLD,18)));
         currentPlayerB.setForeground(Color.white);
         currentPlayerB.setBounds(550,210,150,150);
-        Hanabiclient.panel.add(currentPlayerB,JLayeredPane.MODAL_LAYER);
+        Hanabi_client.panel.add(currentPlayerB,JLayeredPane.MODAL_LAYER);
 
 
         // total point text
@@ -80,7 +81,7 @@ public class CoordinateSystem {
         totalpoint.setFont((new Font("Time",Font.BOLD,18)));
         totalpoint.setForeground(Color.white);
         totalpoint.setBounds(550,50,150,50);
-        Hanabiclient.panel.add(totalpoint,JLayeredPane.MODAL_LAYER);
+        Hanabi_client.panel.add(totalpoint,JLayeredPane.MODAL_LAYER);
 
 
         // log window init
@@ -91,12 +92,15 @@ public class CoordinateSystem {
         jScrollPane.setBounds(550,360,210,350);
         jScrollPane.getViewport().getView().setEnabled(false);
         jScrollPane.getViewport().getView().setForeground(Color.black);
-        Hanabiclient.panel.add(jScrollPane,JLayeredPane.MODAL_LAYER);
+        Hanabi_client.panel.add(jScrollPane,JLayeredPane.MODAL_LAYER);
     }
 
+    public void setGame(Game game) {
+        CoordinateSystem.game = game;
+    }
 
     // using game model to initialize
-    public static void init(Game game){
+    public void init(){
         // init hands of players
         inithands(game);
 
@@ -108,7 +112,7 @@ public class CoordinateSystem {
             Image newing = image.getScaledInstance(120,50, Image.SCALE_SMOOTH);
             lblPlayer[i]= new JLabel( new ImageIcon (newing));
             lblPlayer[i].setBounds(780,50+i*120,120,50);
-            Hanabiclient.panel.add(lblPlayer[i],JLayeredPane.MODAL_LAYER);
+            Hanabi_client.panel.add(lblPlayer[i],JLayeredPane.MODAL_LAYER);
         }
 
 
@@ -119,7 +123,7 @@ public class CoordinateSystem {
         Image newing = image.getScaledInstance(150,80, Image.SCALE_SMOOTH);
         CurrentPlayer= new JLabel( new ImageIcon (newing));
         CurrentPlayer.setBounds(550,290+i,150,80);
-        Hanabiclient.panel.add(CurrentPlayer,JLayeredPane.MODAL_LAYER);
+        Hanabi_client.panel.add(CurrentPlayer,JLayeredPane.MODAL_LAYER);
 
 
         //game info counter.
@@ -128,7 +132,7 @@ public class CoordinateSystem {
         info.setFont((new Font("Time",Font.BOLD,25)));
         info.setForeground(Color.white);
         info.setBounds(650,160,70,70);
-        Hanabiclient.panel.add(info,JLayeredPane.MODAL_LAYER);
+        Hanabi_client.panel.add(info,JLayeredPane.MODAL_LAYER);
 
 
         // game fuse counter.
@@ -137,7 +141,7 @@ public class CoordinateSystem {
         fuse.setFont((new Font("Time",Font.BOLD,25)));
         fuse.setForeground(Color.white);
         fuse.setBounds(650,210,70,70);
-        Hanabiclient.panel.add(fuse,JLayeredPane.MODAL_LAYER);
+        Hanabi_client.panel.add(fuse,JLayeredPane.MODAL_LAYER);
 
 
         // game points.
@@ -146,18 +150,18 @@ public class CoordinateSystem {
         points.setFont((new Font("Time",Font.BOLD,26)));
         points.setForeground(Color.white);
         points.setBounds(550,80,70,70);
-        Hanabiclient.panel.add(points,JLayeredPane.MODAL_LAYER);
+        Hanabi_client.panel.add(points,JLayeredPane.MODAL_LAYER);
 
 
         LinkedList<LinkedList<Card>> discard = game.getDiscardedCard();
-        discardaddtopanel(lbldiscard,discard);
+        discardAddToPanel(lbldiscard);
 
         LinkedList<LinkedList<Card>> firework = game.getFirework();
-        fireworkaddtopanel(lblfirework,firework);
+        fireworkAddToPanel(lblfirework);
     }
 
 
-    private static void inithands(Game game){
+    private void inithands(Game game){
         LinkedList<LinkedList<Card>> hand = game.getHands();
         for (int i =0; i< hand.size(); i++){
             for (int j= 0 ; j < hand.get(i).size();j++){
@@ -167,13 +171,13 @@ public class CoordinateSystem {
                 Image newing = image.getScaledInstance(60,97, Image.SCALE_SMOOTH);
                 lblCard[i][j] = new JLabel( new ImageIcon (newing));
                 lblCard[i][j].setBounds(900+j*70,50+i*120,60,97);
-                Hanabiclient.panel.add(lblCard[i][j],JLayeredPane.MODAL_LAYER);
+                Hanabi_client.panel.add(lblCard[i][j],JLayeredPane.MODAL_LAYER);
             }
         }
     }
 
 
-    private static void discardaddtopanel(JLabel[][] tobeadd, LinkedList<LinkedList<Card>> hand){
+    private void discardAddToPanel(JLabel[][] tobeadd){
         for (int i =0; i< hand.size(); i++){
             for (int j= 0 ; j < hand.get(i).size();j++){
                 ImageIcon discardi = new ImageIcon(CoordinateSystem.class.getResource( "/"+hand.get(i).get(j).getCardColor() + hand.get(i).get(j).getCardRank() +".jpg" ));
@@ -181,13 +185,13 @@ public class CoordinateSystem {
                 Image newdiscard = discardImage.getScaledInstance(50,83, Image.SCALE_SMOOTH);
                 tobeadd[i][j] = new JLabel( new ImageIcon (newdiscard));
                 tobeadd[i][j].setBounds(90+j*20,200+i*83,50,83);
-                Hanabiclient.panel.add(tobeadd[i][j],JLayeredPane.MODAL_LAYER);
+                Hanabi_client.panel.add(tobeadd[i][j],JLayeredPane.MODAL_LAYER);
             }
         }
     }
 
 
-    private static void fireworkaddtopanel(JLabel[] tobeadd, LinkedList<LinkedList<Card>> hand){
+    private void fireworkAddToPanel(JLabel[] tobeadd){
         for (int i =0; i< hand.size(); i++){
             if (hand.get(i).size() ==0){
                 break;
@@ -197,27 +201,27 @@ public class CoordinateSystem {
             Image newfire = fireim.getScaledInstance(60,97, Image.SCALE_SMOOTH);
             tobeadd[i] = new JLabel( new ImageIcon (newfire));
             tobeadd[i].setBounds(90+70*i,70,60,97);
-            Hanabiclient.panel.add(tobeadd[i],JLayeredPane.MODAL_LAYER);
+            Hanabi_client.panel.add(tobeadd[i],JLayeredPane.MODAL_LAYER);
         }
     }
 
 
-    public static void clearpanel(int x,int y,int z){
+    public void clearpanel(int x,int y,int z){
         for (int i =0 ; i< x ;i++){
             for (int j =0; j<y;j++){
-                Hanabiclient.panel.remove(lblCard[i][j]);
+                Hanabi_client.panel.remove(lblCard[i][j]);
             }
         }
         for (int i=0;i<x;i++)
         {
-        Hanabiclient.panel.remove(lblPlayer[i]);
+        Hanabi_client.panel.remove(lblPlayer[i]);
         }
 
         for (int i=0;i<z;i++){
             if (lblfirework[i]==null){
                 break;
             }
-            Hanabiclient.panel.remove(lblfirework[i]);
+            Hanabi_client.panel.remove(lblfirework[i]);
         }
         for (int i =0;i<6;i++){
             if (lbldiscard[i]==null){
@@ -230,19 +234,19 @@ public class CoordinateSystem {
                 }
                 else
                     {
-                    Hanabiclient.panel.remove(lbldiscard[i][j]);
+                    Hanabi_client.panel.remove(lbldiscard[i][j]);
                     }
             }
         }
-        Hanabiclient.panel.remove(CurrentPlayer);
-        Hanabiclient.panel.remove(info);
-        Hanabiclient.panel.remove(fuse);
-        Hanabiclient.panel.remove(points);
+        Hanabi_client.panel.remove(CurrentPlayer);
+        Hanabi_client.panel.remove(info);
+        Hanabi_client.panel.remove(fuse);
+        Hanabi_client.panel.remove(points);
         pdcard = new JLabel("");
     }
 
 
-    public static void update(Game game){
+    public void update(){
         int x=game.getHands().size();
         int y = game.getHands().get(0).size();
         int z = game.getFirework().size();
@@ -251,14 +255,71 @@ public class CoordinateSystem {
     }
 
 
-    public static void addActionListners(Game game) {
-        for (int i = 0; i < game.getHands().get(0).size(); i++) {
-            lblCard[game.getYou()][i].addMouseListener(MainListener.createcardListener(game.getHands().get(0).get(i)));
+    public void addActionListeners() {
+        LinkedList<Card> your_hand = game.getHands().get(game.getYou());
+        for (int i = 0; i < your_hand.size(); i++) {
+            lblCard[game.getYou()][i].addMouseListener(MainListener.createcardListener(your_hand.get(i)));
         }
         for (int i = 0; i < game.getHands().size(); i++) {
             if (i != game.getYou()) {
                 lblPlayer[i].addMouseListener(MainListener.createPlayerListener(i));
             }
         }
+    }
+
+    public void disableActionListener(){
+        LinkedList<Card> your_hand = game.getHands().get(game.getYou());
+        for (int i = 0; i < your_hand.size(); i++) {
+            for (MouseListener j : lblCard[game.getYou()][i].getMouseListeners()) {
+                    lblCard[game.getYou()][i].removeMouseListener(j);
+            }
+        }
+        for (int i = 0; i < game.getHands().size(); i++) {
+            if (i != game.getYou()) {
+                for (MouseListener j : lblPlayer[i].getMouseListeners()){
+                    lblPlayer[i].removeMouseListener(j);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void notifyPointChange() {
+        points.setText(String.valueOf(game.getPoints()));
+    }
+
+    @Override
+    public void notifyHandChange() {
+
+    }
+
+    @Override
+    public void notifyInfoTokenChange() {
+
+    }
+
+    @Override
+    public void notifyFuseTokenChange() {
+
+    }
+
+    @Override
+    public void notifyCurrentPlayerChange() {
+
+    }
+
+    @Override
+    public void notifyFireworkChange() {
+
+    }
+
+    @Override
+    public void notifyDiscardChange() {
+
+    }
+
+    @Override
+    public void addActionListener() {
+        addActionListeners();
     }
 }

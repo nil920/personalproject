@@ -27,8 +27,10 @@ public class GUIHanabiSystem {
     private static WaitingRoom waitingroomView;
     public static int cardindex;
     public static boolean canceltimer;
-    public static GamePagePanel Hanabiclient = new GamePagePanel();
+    public static GamePagePanel Hanabi_client = new GamePagePanel();
     public static boolean AI = false;
+
+    private static CoordinateSystem coordinateSystem;
 
 
     /**
@@ -98,8 +100,8 @@ public class GUIHanabiSystem {
                 //game start
                 if (response.notice.equals("game starts")) {
                     waitingroomView.dispose();
-                    Hanabiclient.init();
-                    Hanabiclient.display();
+                    Hanabi_client.init();
+                    Hanabi_client.display();
                     if (rainbow.equals("none")) {
                         gameModel = new Game(response.hands, timer, false);
                     }
@@ -107,26 +109,26 @@ public class GUIHanabiSystem {
                         gameModel = new Game(response.hands, timer, true);
                     }
                     // game view initilize
-                    CoordinateSystem.initboard();
-                    CoordinateSystem.init(gameModel);
+                    coordinateSystem = new CoordinateSystem();
+                    coordinateSystem.init();
                 }
 
 
                 // your turn.
                 if (response.reply.equals("your move")) {
                     // start timer
-                    Hanabiclient.timer = new Timer();
-                    Hanabiclient.AIA.setVisible(true);
+                    Hanabi_client.timer = new Timer();
+                    Hanabi_client.AIA.setVisible(true);
                     // enable all acton listener
-                    CoordinateSystem.addActionListners(gameModel);
+                    coordinateSystem.addActionListeners();
                     gameModel.setYouTurn(true);
                     canceltimer = false;
                     // enable ai assistant
-                    Hanabiclient.AIA.addActionListener(MainListener.createAIAlistener(gameModel));
+                    Hanabi_client.AIA.addActionListener(MainListener.createAIAlistener(gameModel));
                     // if ai, go to ai package
                     if (AI == false) {
                         while (!canceltimer) {
-                            Hanabiclient.updateCounter(gameModel.getTimer());
+                            Hanabi_client.updateCounter(gameModel.getTimer());
                         }
 
                     }

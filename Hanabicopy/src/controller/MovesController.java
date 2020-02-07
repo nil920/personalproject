@@ -14,7 +14,7 @@ public class MovesController
 
     public static void play(int cardIndex)
     {
-        GUIHanabiSystem.gameModel.writetocsv("play",cardIndex,"",0);
+        GUIHanabiSystem.gameModel.writeToCSV("play",cardIndex,"",0);
         controller.gson.PlayDiscardMessage playCard = new PlayDiscardMessage("play",cardIndex);
         Gson playGson = new Gson();
         String msg = playGson.toJson(playCard);
@@ -30,7 +30,7 @@ public class MovesController
 
     public static void discard(int cardIndex)
     {
-        GUIHanabiSystem.gameModel.writetocsv("discard",cardIndex,"",0);
+        GUIHanabiSystem.gameModel.writeToCSV("discard",cardIndex,"",0);
         PlayDiscardMessage discardCard = new PlayDiscardMessage("discard",cardIndex);
         Gson discardGson = new Gson();
         String msg = discardGson.toJson(discardCard);
@@ -46,7 +46,7 @@ public class MovesController
 
     public static void giveClueSuit(int indexOfPlayer, String suit)
     {
-        GUIHanabiSystem.gameModel.writetocsv("info",0,suit,0);
+        GUIHanabiSystem.gameModel.writeToCSV("info",0,suit,0);
         controller.gson.GivenInfoSuit givenInfoSuit = new GivenInfoSuit("inform",indexOfPlayer,suit);
         Gson clueSuitGson = new Gson();
         String msg = clueSuitGson.toJson(givenInfoSuit);
@@ -62,7 +62,7 @@ public class MovesController
 
     public static void giveClueRank(int indexOfPlayer, int rank)
     {
-        GUIHanabiSystem.gameModel.writetocsv("info",0,"",rank);
+        GUIHanabiSystem.gameModel.writeToCSV("info",0,"",rank);
         controller.gson.GivenInfoInt givenInfoSuit = new controller.gson.GivenInfoInt("inform",indexOfPlayer,rank);
         Gson clueRankGson = new Gson();
         String msg = clueRankGson.toJson(givenInfoSuit);

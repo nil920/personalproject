@@ -23,10 +23,6 @@ public class MainListener extends MouseAdapter implements ActionListener {
         return new PlayActionListener(cardind);
     }
 
-    public static DiscardListener creatediscardlistener(int cardind){
-        return new DiscardListener(cardind);
-    }
-
     public static PlayerListener createPlayerListener(int player){
         return new PlayerListener(player);
     }
