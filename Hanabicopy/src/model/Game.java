@@ -165,6 +165,7 @@ public class Game {
                 if(discardedcard.get(i).size() == 0)
                 {
                     discardedcard.get(i).add(card);
+                    notifyDiscard_change();
                     return;
                 }
             }
@@ -193,6 +194,7 @@ public class Game {
             for (LinkedList<Card> cards : this.firework) {
                 if (cards.size() == 0) {
                     cards.add(card);
+                    notifyFirework_change();
                     return;
                 }
             }
@@ -226,12 +228,6 @@ public class Game {
         notifyCurrent_Player_change();
     }
 
-    // add listener ----------------------------------
-    // probably not set, but remove some card from hands
-    public void setHands(LinkedList<LinkedList<Card>> hands) {
-        this.hands = hands;
-        notifyHand_change();
-    }
 
     // add listener ----------------------------------
     public void changeCard(Card card, int pos)
@@ -242,7 +238,6 @@ public class Game {
                 hands.get(currentPlayer).set(i,card);
             }
         }
-        notifyHand_change();
     }
 
     // add listener ----------------------------------
@@ -475,7 +470,7 @@ public class Game {
 
     private void disableActionListener(){
         for (Subscriber i:subscribers){
-            i.disableActionListner();
+            i.disableActionListeners();
         }
     }
 

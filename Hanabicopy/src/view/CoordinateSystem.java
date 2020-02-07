@@ -308,7 +308,7 @@ public class CoordinateSystem implements Subscriber{
     }
 
     @Override
-    public void disableActionListner() {
+    public void disableActionListeners() {
         disableActionListener();
     }
 

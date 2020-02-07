@@ -174,6 +174,7 @@ public class GUIHanabiSystem {
                         gameModel.changeCard(card, cardindex);
                     }
                     gameModel.increaseinfotoken();
+                    gameModel.setYouTurn(false);
                     gameModel.increaseCurrentPlayer();
                     Hanabi_client.aiButtonRemoveListener();
                 }
@@ -207,6 +208,7 @@ public class GUIHanabiSystem {
                         gameModel.removeCurrentPlayerHand(response.position);
                         gameModel.addToFirework(Card.stringtocard(response.card,0));
                     }
+                    gameModel.setYouTurn(false);
                     gameModel.increaseCurrentPlayer();
                     Hanabi_client.aiButtonRemoveListener();
                 }
@@ -225,6 +227,7 @@ public class GUIHanabiSystem {
 
                         gameModel.addToDiscard(Card.stringtocard(response.card,0));
                     }
+                    gameModel.setYouTurn(false);
                     gameModel.minusBlackFuseCounter();
                     gameModel.increaseCurrentPlayer();
                     Hanabi_client.aiButtonRemoveListener();
@@ -240,6 +243,7 @@ public class GUIHanabiSystem {
                         gameModel.colorHintToHand(response.suit.charAt(0),response.info);
                         CoordinateSystem.logWindow.append("\n" + Action.youinformaction(gameModel, response.suit));
                     }
+                    gameModel.setYouTurn(false);
                     gameModel.minusInfoCounter();
                     gameModel.increaseCurrentPlayer();
                     Hanabi_client.aiButtonRemoveListener();

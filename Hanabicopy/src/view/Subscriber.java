@@ -22,6 +22,6 @@ public interface Subscriber {
 
     // ACTION LISTENER
     public void addActionListener();
-    public void disableActionListner();
+    public void disableActionListeners();
 
 }
