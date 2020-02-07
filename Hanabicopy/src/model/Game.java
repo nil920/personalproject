@@ -65,6 +65,8 @@ public class Game {
 
         points = 0;
 
+        subscribers = new ArrayList<>();
+
         if(rainbow)
         {
             for(int i = 0; i < 6; i++)
@@ -132,6 +134,10 @@ public class Game {
             hands.get(currentPlayer).get(i).setCardIndex(i+1);
         }
         notifyCardRemove();
+    }
+
+    public Card getCardAtPosition(int positon){
+        return hands.get(currentPlayer).get(positon-1);
     }
 
 

@@ -3,12 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="cef17178-54b1-4273-bef3-e3e67166215b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hanabicopy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Hanabicopy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hanabicopy/model/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hanabicopy/model/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hanabicopy/startup/GUIHanabiSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hanabicopy/startup/GUIHanabiSystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hanabicopy/view/CreateGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hanabicopy/view/CreateGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Hanabicopy/view/GamePagePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Hanabicopy/view/GamePagePanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CoordinateSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CoordinateSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/startup/GUIHanabiSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/startup/GUIHanabiSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CreateGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CreateGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/GamePagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GamePagePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Subscriber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/CardListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/CardListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/listeners/PlayerListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/listeners/PlayerListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,6 +60,26 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="GUIHanabiSystem" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="startup.GUIHanabiSystem" />
+      <module name="Hanabicopy" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="startup.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GUIHanabiSystem" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -69,7 +92,7 @@
       <updated>1580967554845</updated>
       <workItem from="1580967557676" duration="1036000" />
       <workItem from="1581011235211" duration="2199000" />
-      <workItem from="1581032408205" duration="13487000" />
+      <workItem from="1581032408205" duration="15254000" />
     </task>
     <servers />
   </component>
@@ -88,5 +111,21 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/startup/GUIHanabiSystem.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/startup/GUIHanabiSystem.java</url>
+          <line>102</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

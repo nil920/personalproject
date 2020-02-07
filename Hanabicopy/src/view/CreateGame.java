@@ -76,7 +76,7 @@ public class CreateGame extends JFrame {
         panel.add(new JLabel());
         panel.add(advance);
 
-        String[] Option = {"none", "firework", "wild"};
+        String[] Option = {"none", "firework"};
         JComboBox advanceCombo = new JComboBox(Option);
         advanceCombo.setFont((new Font("Time", Font.PLAIN, 25)));
         panel.add(advanceCombo);

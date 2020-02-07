@@ -101,6 +101,7 @@ public class GUIHanabiSystem {
                 if (response.notice.equals("game starts")) {
                     waitingroomView.dispose();
                     Hanabi_client = new GamePagePanel();
+                    Hanabi_client.setGame(gameModel);
                     Hanabi_client.display();
                     if (rainbow.equals("none")) {
                         gameModel = new Game(response.hands, timer, false);
@@ -110,10 +111,10 @@ public class GUIHanabiSystem {
                     }
                     // game view initialize
                     coordinateSystem = new CoordinateSystem();
-                    coordinateSystem.init();
                     coordinateSystem.setGame(gameModel);
+                    coordinateSystem.init();
                     gameModel.addListener(coordinateSystem);
-                    Hanabi_client.setGame(gameModel);
+
                 }
 
 
@@ -155,13 +156,7 @@ public class GUIHanabiSystem {
                     }
                     else {
                         // remove the discarded card of current player's hand
-                        LinkedList<LinkedList<Card>> hands = gameModel.getHands();
-                        for (int i = 0; i < hands.get(gameModel.getCurrentPlayer()+1).size(); i++) {
-                            if (hands.get(gameModel.getCurrentPlayer()+1).get(i).getCardIndex() == response.position) {
-                                hands.get(gameModel.getCurrentPlayer()+1).remove(i);
-                            }
-                        }
-                        gameModel.setHands(hands);
+                        gameModel.removeCurrentPlayerHand(response.position);
                     }
                     gameModel.increaseCurrentPlayer();
                     gameModel.increaseinfotoken();
@@ -170,22 +165,15 @@ public class GUIHanabiSystem {
 
                 if (response.reply.equals("accepted")) {
                     if (Boolean.FALSE.equals(response.replaced)){
-                        LinkedList<LinkedList<Card>> hands = gameModel.getHands();
-                        for (int i = 0; i < hands.get(gameModel.getCurrentPlayer()).size(); i++) {
-                            if (hands.get(gameModel.getCurrentPlayer()).get(i).getCardIndex() == cardindex) {
-                                hands.get(gameModel.getCurrentPlayer()).remove(i);
-                            }
-                        }
-                        gameModel.setHands(hands);
-                        gameModel.increaseinfotoken();
+                        gameModel.removeCurrentPlayerHand(cardindex);
                     }
                     if (Boolean.TRUE.equals(response.replaced)) {
                         Card card = new Card(cardindex, 'q', 0);
-                        Card oldcard = Card.stringtocard(response.card,0);
-                        gameModel.addToDiscard(oldcard);
+                        Card old_card = Card.stringtocard(response.card,0);
+                        gameModel.addToDiscard(old_card);
                         gameModel.changeCard(card, cardindex);
-                        gameModel.increaseinfotoken();
                     }
+                    gameModel.increaseinfotoken();
                     gameModel.increaseCurrentPlayer();
                     Hanabi_client.aiButtonRemoveListener();
                 }
@@ -196,21 +184,12 @@ public class GUIHanabiSystem {
                     if (!response.card.equals("none")) {
                         // add log --
                         CoordinateSystem.logWindow.append("\n" + Action.playaction(gameModel, response.position-1));
-                        //
-                        gameModel.fireworkOrDiscard(gameModel.getHands().get(gameModel.getCurrentPlayer()).get(response.position-1));
+                        gameModel.fireworkOrDiscard(gameModel.getCardAtPosition(response.position));
                         Card card = Card.stringtocard(response.card, response.position);
-                        gameModel.changeCard(card, (response.position));
+                        gameModel.changeCard(card, response.position);
                     }
                     else {
-                        LinkedList<LinkedList<Card>> hands = gameModel.getHands();
-                        for (int i = 0; i < hands.get(gameModel.getCurrentPlayer()).size(); i++) {
-                            if (hands.get(gameModel.getCurrentPlayer()).get(i).getCardIndex() == cardindex) {
-                                hands.get(gameModel.getCurrentPlayer()).remove(i);
-                            }
-                        }
-                        gameModel.setHands(hands);
-                        gameModel.increaseinfotoken();
-
+                        gameModel.removeCurrentPlayerHand(response.position);
                     }
                     gameModel.increaseCurrentPlayer();
                 }
@@ -220,18 +199,13 @@ public class GUIHanabiSystem {
                 if (response.reply.equals("built")) {
                     if (Boolean.TRUE.equals(response.replaced)) {
                         Card card = new Card(response.position, 'q', 0);
-                        gameModel.addToFirework(Card.stringtocard(response.card,0));
                         gameModel.changeCard(card, response.position);
+
+                        gameModel.addToFirework(Card.stringtocard(response.card,0));
                     }
                     else {
-                        LinkedList<LinkedList<Card>> hands = gameModel.getHands();
-                        for (int i = 0; i < hands.get(gameModel.getCurrentPlayer()).size(); i++) {
-                            if (hands.get(gameModel.getCurrentPlayer()).get(i).getCardIndex() == cardindex) {
-                                hands.get(gameModel.getCurrentPlayer()).remove(i);
-                            }
-                        }
+                        gameModel.removeCurrentPlayerHand(response.position);
                         gameModel.addToFirework(Card.stringtocard(response.card,0));
-                        gameModel.setHands(hands);
                     }
                     gameModel.increaseCurrentPlayer();
                     Hanabi_client.aiButtonRemoveListener();
@@ -242,18 +216,14 @@ public class GUIHanabiSystem {
                 if (response.reply.equals("burned")) {
                     if (Boolean.TRUE.equals(response.replaced)) {
                         Card card = new Card(cardindex, 'q', 0);
-                        gameModel.addToDiscard(Card.stringtocard(response.card,0));
                         gameModel.changeCard(card, cardindex);
+
+                        gameModel.addToDiscard(Card.stringtocard(response.card,0));
                     }
                     else {
-                        LinkedList<LinkedList<Card>> hands = gameModel.getHands();
-                        for (int i = 0; i < hands.get(gameModel.getCurrentPlayer()).size(); i++) {
-                            if (hands.get(gameModel.getCurrentPlayer()).get(i).getCardIndex() == cardindex) {
-                                hands.get(gameModel.getCurrentPlayer()).remove(i);
-                            }
-                        }
+                        gameModel.removeCurrentPlayerHand(response.position);
+
                         gameModel.addToDiscard(Card.stringtocard(response.card,0));
-                        gameModel.setHands(hands);
                     }
                     gameModel.minusBlackFuseCounter();
                     gameModel.increaseCurrentPlayer();

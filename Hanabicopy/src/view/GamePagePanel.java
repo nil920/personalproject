@@ -1,6 +1,7 @@
 package view;
 
 import model.Game;
+import startup.GUIHanabiSystem;
 import view.listeners.MainListener;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 public class GamePagePanel extends JLayeredPane{
 
     public Timer timer;
-    public ImageIcon background=new ImageIcon(GamePagePanel.class.getResource("/background2.png"));
+    public ImageIcon background;
     public JFrame frame;
     private Menu menu;
     public JButton play,discard,give,AIA;
@@ -23,6 +24,8 @@ public class GamePagePanel extends JLayeredPane{
 
 
     public GamePagePanel(){
+        background=new ImageIcon(GamePagePanel.class.getResource("/background2.png"));
+
         lblBoard  = new JLabel(background);
         lblBoard.setBounds(0,20,1366,768);
 
