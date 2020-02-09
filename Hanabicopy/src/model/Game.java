@@ -2,7 +2,6 @@ package model;
 
 
 import view.Subscriber;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
