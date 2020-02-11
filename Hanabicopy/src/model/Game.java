@@ -194,6 +194,7 @@ public class Game {
                 if (cards.size() == 0) {
                     cards.add(card);
                     notifyFirework_change();
+                    addPoints();
                     return;
                 }
             }
@@ -205,11 +206,8 @@ public class Game {
 
     // add one info token
     // add listener ----------------------------------
-    public void increaseinfotoken(){
-        if (inforTokenCounter == 8){
-            inforTokenCounter = 8;
-        }
-        else {
+    public void increaseInfoToken(){
+        if (inforTokenCounter < 8) {
             inforTokenCounter++;
             notifyInfo_token_listener();
         }
@@ -386,21 +384,15 @@ public class Game {
                 }
             }
 
-
-            int startpoint = 0;
             for (LinkedList<Card> i : firework){
                 if (i.size() != 0){
                     result.add(i.getLast().toString());
                 }
-            }
-            for (int i =0 ; i<firework.size();i++){
-                if (firework.get(i).size() != 0){
-                    startpoint = i;
+                else {
+                    result.add("nocard");
                 }
             }
-            for (int i = startpoint; i< firework.size();i++){
-                result.add("nocard");
-            }
+            
             result.add(String.valueOf(inforTokenCounter));
             result.add(action);
             result.add(String.valueOf(position));

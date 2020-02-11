@@ -242,6 +242,7 @@ public class CoordinateSystem implements Subscriber{
         int counter = 0;
         for (Card i : game.getHands().get(player)){
             ImageIcon img = new ImageIcon(CoordinateSystem.class.getResource ( "/"+i.getCardColor() +i.getCardRank() +".jpg" ));
+            img.getImage().flush();
             Image image = img.getImage();
             Image newing = image.getScaledInstance(60,97, Image.SCALE_SMOOTH);
             lblCard[player][counter].setIcon(new ImageIcon(newing));

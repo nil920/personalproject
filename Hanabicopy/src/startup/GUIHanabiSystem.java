@@ -9,10 +9,8 @@ import model.Card;
 import model.Game;
 import model.Waitingroom;
 import view.*;
-import view.listeners.MainListener;
 
 import java.io.IOException;
-import java.util.LinkedList;
 
 /**
  * A class that starts up the Hanabi System GUI
@@ -159,7 +157,7 @@ public class GUIHanabiSystem {
                         gameModel.removeCurrentPlayerHand(response.position);
                     }
                     gameModel.increaseCurrentPlayer();
-                    gameModel.increaseinfotoken();
+                    gameModel.increaseInfoToken();
                 }
 
 
@@ -173,7 +171,7 @@ public class GUIHanabiSystem {
                         gameModel.addToDiscard(old_card);
                         gameModel.changeCard(card, cardindex);
                     }
-                    gameModel.increaseinfotoken();
+                    gameModel.increaseInfoToken();
                     gameModel.setYouTurn(false);
                     gameModel.increaseCurrentPlayer();
                     Hanabi_client.aiButtonRemoveListener();
