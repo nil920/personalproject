@@ -229,12 +229,14 @@ public class Game {
     // add listener ----------------------------------
     public void changeCard(Card card, int pos)
     {
-        LinkedList <Card> currentplayerhand = hands.get(currentPlayer);
-        for (int i = 0; i < currentplayerhand.size(); i++) {
-            if (currentplayerhand.get(i).getCardIndex() == pos) {
+
+        LinkedList <Card> current_player_hand = hands.get(currentPlayer);
+        for (int i = 0; i < current_player_hand.size(); i++) {
+            if (current_player_hand.get(i).getCardIndex() == pos) {
                 hands.get(currentPlayer).set(i,card);
             }
         }
+        notifyHand_change();
     }
 
     // add listener ----------------------------------
@@ -287,7 +289,7 @@ public class Game {
 
     public void intHintToHand(int hint, LinkedList<Boolean> listhint){
         for (int i =0; i<listhint.size();i++){
-            if (listhint.get(i))
+            if (listhint.get(i) == Boolean.TRUE)
             {
                 hands.get(you).get(i).setCardRank(hint);
                 hands.get(you).get(i).setRankKnown();
@@ -299,7 +301,7 @@ public class Game {
 
     public void colorHintToHand(char color, LinkedList<Boolean> listhint){
         for (int i =0; i<listhint.size();i++){
-            if (listhint.get(i)) {
+            if (listhint.get(i) == Boolean.TRUE) {
                 hands.get(you).get(i).setCardColor(color);
                 hands.get(you).get(i).setColorKnown();
             }

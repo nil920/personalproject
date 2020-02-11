@@ -16,7 +16,7 @@ public class GiveRankActionListener extends MainListener{
     public void actionPerformed(ActionEvent e) {
         cardnumber =Integer.valueOf((String) startup.GUIHanabiSystem.Hanabi_client.ranks.getSelectedItem());
         MovesController.giveClueRank(playerid,cardnumber);
-        startup.GUIHanabiSystem.Hanabi_client.disableallbutton();
+        startup.GUIHanabiSystem.Hanabi_client.disableAllButton();
 
     }
 }

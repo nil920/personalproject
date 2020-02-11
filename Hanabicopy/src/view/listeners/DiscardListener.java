@@ -12,9 +12,8 @@ public class DiscardListener extends MainListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        startup.GUIHanabiSystem.cardIndex =cardid;
         MovesController.discard(cardid);
-        startup.GUIHanabiSystem.Hanabi_client.disableallbutton();
-        startup.GUIHanabiSystem.cardindex=cardid;
-
+        startup.GUIHanabiSystem.Hanabi_client.disableAllButton();
     }
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Hanabicopy.iml" filepath="$PROJECT_DIR$/Hanabicopy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Hanabicopy.iml" filepath="$PROJECT_DIR$/.idea/Hanabicopy.iml" />
     </modules>
   </component>
 </project>

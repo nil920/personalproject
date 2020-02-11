@@ -111,17 +111,17 @@ public class GamePagePanel extends JLayeredPane{
         this.repaint();
     }
 
-    public void setplaydisButtonDisplay(boolean flag){
+    public void setPlayButtonDisplay(boolean flag){
         discard.setVisible(flag);
         play.setVisible(flag);
     }
 
-    public void setcardrankbuttonDisplay(boolean flag){
+    public void setCardRankButtonDisplay(boolean flag){
         color.setVisible(flag);
         rank.setVisible(flag);
     }
 
-    public void disableallbutton(){
+    public void disableAllButton(){
         color.setVisible(false);
         rank.setVisible(false);
         discard.setVisible(false);
