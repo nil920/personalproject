@@ -1,25 +1,4 @@
 # nil920_personal
 
-Current bug:
-Server end:
-    Burn not working correctly.
-    {"reply":"burned","card":"r3","replaced":true,"position":2}
-    not go into line 261
-    
-    
-    
-Client side:
-    Discard card not display correctly. (for the player do the action).
-    Unsuccessful discard
-    Unsuccessful play
-
-Error in:
-display error
-{"reply":"inform","rank":2,"info":[false,true,false,false,false]}
-
-
-index error, display error:
-{"reply":"built","card":"g1","replaced":true,"position":5}
-
-
-{"reply":"accepted","replaced":true,"card":"y3"}
+1. To test the game, please run the server.java under the hanabiserver/src first.
+2. Then run the Hanabicopy\src\startup\GUIHanabiSystem.java to start.
